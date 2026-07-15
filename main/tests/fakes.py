@@ -1,13 +1,10 @@
 import re
 
 from app.providers.base import LLMResult, TokenUsage
-from app.services.pii import SanitizationResult
+from app.services.guardrail import SanitizationResult
 
 
 class FakeSanitizer:
-    def __init__(self, language: str, confidence_threshold: float):
-        self.language = language
-
     def sanitize(self, text: str) -> SanitizationResult:
         emails = re.findall(r"[\w.+-]+@[\w.-]+", text)
         sanitized = re.sub(r"[\w.+-]+@[\w.-]+", "[EMAIL]", text)

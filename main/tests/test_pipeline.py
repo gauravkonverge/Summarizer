@@ -11,14 +11,14 @@ def test_pipeline_preserves_response_contract_and_combines_usage():
     provider = FakeProvider()
     settings = Settings(
         bedrock_model_id=provider.model_id,
-        bypass_pii_sanitization=False,
+        include_original_content=True,
         input_cost_per_million_tokens_usd=1.0,
         output_cost_per_million_tokens_usd=2.0,
     )
     pipeline = SummarizationPipeline(
         provider=provider,
         settings=settings,
-        sanitizer_factory=FakeSanitizer,
+        sanitizer=FakeSanitizer(),
     )
     request = SummarizeRequest.model_validate(
         {
@@ -62,9 +62,8 @@ def test_large_repository_sample_runs_without_live_credentials():
         provider=provider,
         settings=Settings(
             bedrock_model_id=provider.model_id,
-            bypass_pii_sanitization=False,
         ),
-        sanitizer_factory=FakeSanitizer,
+        sanitizer=FakeSanitizer(),
     )
 
     response = pipeline.summarize(request)
@@ -74,35 +73,3 @@ def test_large_repository_sample_runs_without_live_credentials():
     assert response.timeline_metrics.duration_days == 76
     assert response.timeline_metrics.support_message_count == 17
     assert response.timeline_metrics.customer_message_count == 10
-
-
-def test_development_bypass_does_not_initialize_pii_sanitizer():
-    provider = FakeProvider()
-
-    def forbidden_sanitizer_factory(language: str, confidence_threshold: float):
-        raise AssertionError("PII sanitizer should not be initialized in bypass mode")
-
-    pipeline = SummarizationPipeline(
-        provider=provider,
-        settings=Settings(
-            bedrock_model_id=provider.model_id,
-            bypass_pii_sanitization=True,
-        ),
-        sanitizer_factory=forbidden_sanitizer_factory,
-    )
-    request = SummarizeRequest.model_validate(
-        {
-            "messages": [
-                {"role": "customer", "content": "Synthetic delivery test message."},
-                {"role": "support", "content": "Synthetic support response."},
-            ],
-            "summary_style": "brief",
-            "language": "en",
-        }
-    )
-
-    response = pipeline.summarize(request)
-
-    assert response.total_pii_entities_removed == 0
-    assert response.sanitized_messages[0].sanitized_content == request.messages[0].content
-    assert len(provider.calls) == 2

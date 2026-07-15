@@ -5,7 +5,7 @@ This is the modular replacement for `../code`. It preserves the two-pass summari
 ## Flow
 
 1. Validate `POST /api/summarize`.
-2. Sanitize each message using Presidio and UK-specific recognizers.
+2. Sanitize each message with the independent Amazon Bedrock `ApplyGuardrail` API.
 3. Build a role-labelled sanitized conversation.
 4. Generate a summary through the provider interface.
 5. Verify the summary in a second LLM pass.
@@ -13,11 +13,9 @@ This is the modular replacement for `../code`. It preserves the two-pass summari
 7. Calculate configurable token-cost estimates.
 8. Extract timeline metrics and return the existing response shape.
 
-Sanitization is fail-closed: if PII processing fails, content is not sent to Bedrock.
-
-For local summarizer-only testing with synthetic, non-sensitive data, set
-`BYPASS_PII_SANITIZATION=true`. This sends message content directly to Bedrock and
-must never be enabled for real customer conversations or production deployments.
+Sanitization is mandatory and fail-closed: if the Guardrail fails, blocks content,
+or detects sensitive information without masking it, content is not sent to the
+Bedrock foundation model.
 
 ## Local setup
 
@@ -28,9 +26,9 @@ python3 -m venv .venv
 cp .env.example .env
 ```
 
-The configured `SPACY_MODEL_NAME` must already be installed in the runtime image or environment. The application deliberately does not download NLP models at runtime.
-
-Populate `AWS_REGION` and `BEDROCK_MODEL_ID`. Boto3 discovers credentials through its standard credential chain; application code does not accept a direct provider API key.
+Populate `AWS_REGION`, `BEDROCK_MODEL_ID`, `BEDROCK_GUARDRAIL_ID`, and
+`BEDROCK_GUARDRAIL_VERSION`. Boto3 discovers credentials through its standard
+credential chain; application code does not accept a direct provider API key.
 
 Run tests without AWS credentials:
 
@@ -58,9 +56,11 @@ Provide or confirm:
 
 1. AWS region containing the approved Bedrock model.
 2. Approved Bedrock model ID or inference-profile ID.
-3. An IAM role/profile with `bedrock:InvokeModel` permission for that model resource.
-4. Confirmation that model access is enabled for the account and region.
-5. Model input/output prices if cost estimates must be populated.
+3. A numbered Bedrock Guardrail version configured to mask PII and custom identifiers.
+4. An IAM role/profile with `bedrock:ApplyGuardrail` for the Guardrail and
+   `bedrock:InvokeModel` for the model resource.
+5. Confirmation that Guardrail and model access are enabled in the account and region.
+6. Model input/output prices if cost estimates must be populated.
 
 For a developer machine, authenticate using the organisation's normal AWS SSO/profile workflow and export `AWS_PROFILE`. In AWS, use the workload's IAM role. Long-lived access keys should not be placed in `.env` or committed.
 
@@ -70,5 +70,8 @@ Useful credential checks:
 aws sts get-caller-identity
 aws bedrock list-foundation-models --region "$AWS_REGION"
 ```
+
+The Guardrail runs independently before each model call. Raw Guardrail assessment
+matches are not logged because they can contain the original PII value.
 
 `INCLUDE_ORIGINAL_CONTENT=true` preserves the current response contract. Set it to `false` where returning original PII is not permitted.

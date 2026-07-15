@@ -9,10 +9,9 @@ def test_health_and_summarize_api_without_aws_credentials():
     app = create_app(
         settings=Settings(
             bedrock_model_id=provider.model_id,
-            bypass_pii_sanitization=False,
         ),
         provider=provider,
-        sanitizer_factory=FakeSanitizer,
+        sanitizer=FakeSanitizer(),
     )
     health_endpoint = next(route.endpoint for route in app.routes if route.path == "/health")
     summary_endpoint = next(

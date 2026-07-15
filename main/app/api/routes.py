@@ -5,7 +5,7 @@ from fastapi.responses import RedirectResponse
 
 from app.models.schemas import SummarizeRequest, SummarizeResponse
 from app.providers.base import LLMProviderError
-from app.services.pii import SanitizationError
+from app.services.guardrail import SanitizationError
 from app.services.pipeline import SummarizationPipeline
 
 

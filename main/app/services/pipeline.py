@@ -1,6 +1,5 @@
 """End-to-end summarization orchestration."""
 
-from collections.abc import Callable
 import logging
 
 from app.core.config import Settings
@@ -15,7 +14,7 @@ from app.providers.base import LLMProvider, TokenUsage
 from app.services.confidence import combined_confidence, rule_based_confidence
 from app.services.costs import call_cost, total_cost
 from app.services.parsing import summary_from_response, verifier_from_response
-from app.services.pii import PIISanitizer, SanitizationResult
+from app.services.guardrail import Sanitizer
 from app.services.prompts import (
     SUMMARY_SYSTEM_PROMPT,
     VERIFIER_SYSTEM_PROMPT,
@@ -33,20 +32,11 @@ class SummarizationPipeline:
         *,
         provider: LLMProvider,
         settings: Settings,
-        sanitizer_factory: Callable[[str, float], PIISanitizer] = PIISanitizer,
+        sanitizer: Sanitizer,
     ):
         self.provider = provider
         self.settings = settings
-        self.sanitizer_factory = sanitizer_factory
-        self._sanitizers: dict[str, PIISanitizer] = {}
-
-    def _sanitizer(self, language: str) -> PIISanitizer:
-        key = language.lower()
-        if key not in self._sanitizers:
-            self._sanitizers[key] = self.sanitizer_factory(
-                key, self.settings.pii_confidence_threshold
-            )
-        return self._sanitizers[key]
+        self.sanitizer = sanitizer
 
     @staticmethod
     def _conversation(messages: list[SanitizedMessage]) -> str:
@@ -55,26 +45,12 @@ class SummarizationPipeline:
         )
 
     def summarize(self, request: SummarizeRequest) -> SummarizeResponse:
-        sanitizer = None
-        if self.settings.bypass_pii_sanitization:
-            logger.warning(
-                "PII SANITIZATION IS BYPASSED. Raw message content will be sent to the LLM."
-            )
-        else:
-            sanitizer = self._sanitizer(request.language)
         sanitized_messages: list[SanitizedMessage] = []
         all_entities: set[str] = set()
         total_entities = 0
 
         for index, message in enumerate(request.messages, start=1):
-            result = (
-                SanitizationResult(
-                    sanitized_text=message.content,
-                    original_text=message.content,
-                )
-                if sanitizer is None
-                else sanitizer.sanitize(message.content)
-            )
+            result = self.sanitizer.sanitize(message.content)
             sanitized = SanitizedMessage(
                 role=message.role,
                 original_content=message.content if self.settings.include_original_content else "",
