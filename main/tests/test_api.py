@@ -8,7 +8,9 @@ def test_health_and_summarize_api_without_aws_credentials():
     provider = FakeProvider()
     app = create_app(
         settings=Settings(
+            app_env="local",
             bedrock_model_id=provider.model_id,
+            include_llm_call_inputs=True,
         ),
         provider=provider,
         sanitizer=FakeSanitizer(),

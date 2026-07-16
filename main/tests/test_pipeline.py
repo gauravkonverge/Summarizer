@@ -10,8 +10,10 @@ from tests.fakes import FakeProvider, FakeSanitizer
 def test_pipeline_preserves_response_contract_and_combines_usage():
     provider = FakeProvider()
     settings = Settings(
+        app_env="local",
         bedrock_model_id=provider.model_id,
         include_original_content=True,
+        include_llm_call_inputs=True,
         input_cost_per_million_tokens_usd=1.0,
         output_cost_per_million_tokens_usd=2.0,
     )
@@ -61,6 +63,7 @@ def test_large_repository_sample_runs_without_live_credentials():
     pipeline = SummarizationPipeline(
         provider=provider,
         settings=Settings(
+            app_env="local",
             bedrock_model_id=provider.model_id,
         ),
         sanitizer=FakeSanitizer(),
@@ -73,3 +76,34 @@ def test_large_repository_sample_runs_without_live_credentials():
     assert response.timeline_metrics.duration_days == 76
     assert response.timeline_metrics.support_message_count == 17
     assert response.timeline_metrics.customer_message_count == 10
+
+
+def test_pipeline_hides_original_content_and_prompts_when_disabled():
+    provider = FakeProvider()
+    pipeline = SummarizationPipeline(
+        provider=provider,
+        settings=Settings(
+            app_env="ec2",
+            bedrock_model_id=provider.model_id,
+            include_original_content=False,
+            include_llm_call_inputs=False,
+            log_sanitization_details=False,
+        ),
+        sanitizer=FakeSanitizer(),
+    )
+    request = SummarizeRequest.model_validate(
+        {
+            "messages": [
+                {"role": "customer", "content": "Contact john@example.com."},
+                {"role": "support", "content": "We will provide an update."},
+            ],
+            "summary_style": "brief",
+            "language": "en",
+        }
+    )
+
+    response = pipeline.summarize(request)
+
+    assert response.sanitized_messages[0].original_content == ""
+    assert response.sanitized_messages[0].sanitized_content == "Contact [EMAIL]"
+    assert response.llm_call_inputs == []

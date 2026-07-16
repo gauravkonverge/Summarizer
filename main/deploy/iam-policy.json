@@ -1,0 +1,26 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "InvokeApprovedBedrockModel",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:InvokeModel"
+      ],
+      "Resource": [
+        "arn:aws:bedrock:AWS_REGION:AWS_ACCOUNT_ID:inference-profile/INFERENCE_PROFILE_ID",
+        "arn:aws:bedrock:*::foundation-model/FOUNDATION_MODEL_ID"
+      ]
+    },
+    {
+      "Sid": "ApplySummarizerGuardrail",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:ApplyGuardrail"
+      ],
+      "Resource": [
+        "arn:aws:bedrock:AWS_REGION:AWS_ACCOUNT_ID:guardrail/GUARDRAIL_ID"
+      ]
+    }
+  ]
+}

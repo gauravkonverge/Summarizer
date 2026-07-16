@@ -25,6 +25,7 @@ def create_app(
     sanitizer: Sanitizer | None = None,
 ) -> FastAPI:
     resolved_settings = settings or Settings()
+    resolved_settings.validate_runtime()
     resolved_provider = provider or BedrockProvider(resolved_settings)
     resolved_sanitizer = sanitizer or BedrockGuardrailSanitizer(resolved_settings)
     pipeline = SummarizationPipeline(

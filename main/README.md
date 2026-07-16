@@ -17,6 +17,25 @@ Sanitization is mandatory and fail-closed: if the Guardrail fails, blocks conten
 or detects sensitive information without masking it, content is not sent to the
 Bedrock foundation model.
 
+## Common environment configuration
+
+The application has one environment-variable contract for both local development
+and EC2. Copy `.env.example` locally, or install the same template as
+`/etc/summarizer-api.env` on EC2.
+
+`APP_ENV` selects runtime safety rules; it does not select a different pipeline:
+
+| Setting | Local | EC2 |
+| --- | --- | --- |
+| `APP_ENV` | `local` | `ec2` |
+| AWS authentication | temporary keys or `AWS_PROFILE` | attached EC2 IAM role |
+| `INCLUDE_ORIGINAL_CONTENT` | configurable | must be `false` |
+| `INCLUDE_LLM_CALL_INPUTS` | configurable | must be `false` |
+| `LOG_SANITIZATION_DETAILS` | configurable | must be `false` |
+
+Both modes use the same Bedrock provider, Guardrail sanitizer, and summarization
+pipeline. Boto3 selects the credential source through its standard credential chain.
+
 ## Local setup
 
 ```bash
@@ -75,3 +94,51 @@ The Guardrail runs independently before each model call. Raw Guardrail assessmen
 matches are not logged because they can contain the original PII value.
 
 `INCLUDE_ORIGINAL_CONTENT=true` preserves the current response contract. Set it to `false` where returning original PII is not permitted.
+
+## EC2 deployment
+
+The `deploy/` folder contains templates for the instance role, systemd, and Nginx.
+The templates contain placeholders and must be reviewed for the target AWS account,
+Region, approved inference profile, and Guardrail.
+
+1. Create an EC2 IAM role from `deploy/iam-policy.json`, replace all placeholders,
+   and attach the role to the instance. Cross-Region inference profiles can require
+   both the inference-profile ARN and destination foundation-model ARNs.
+2. Install this `main` directory at `/opt/summarizer-api`, create the service user,
+   and create the virtual environment:
+
+   ```bash
+   sudo useradd --system --home /opt/summarizer-api --shell /usr/sbin/nologin summarizer
+   sudo chown -R summarizer:summarizer /opt/summarizer-api
+   sudo -u summarizer python3 -m venv /opt/summarizer-api/.venv
+   sudo -u summarizer /opt/summarizer-api/.venv/bin/python -m pip install -r /opt/summarizer-api/requirements.txt
+   ```
+
+3. Copy the common environment template outside the repository:
+
+   ```bash
+   sudo cp .env.example /etc/summarizer-api.env
+   sudo chmod 600 /etc/summarizer-api.env
+   ```
+
+   Set `APP_ENV=ec2`, remove local AWS credential/profile values, populate the
+   Bedrock values, and set the three sensitive observability options to `false`.
+
+4. Install and start the systemd unit:
+
+   ```bash
+   sudo cp deploy/summarizer-api.service /etc/systemd/system/
+   sudo systemctl daemon-reload
+   sudo systemctl enable --now summarizer-api
+   sudo systemctl status summarizer-api
+   ```
+
+5. Optionally install `deploy/nginx.conf` as the Nginx site configuration. Terminate
+   HTTPS at an Application Load Balancer or configure an approved TLS certificate
+   in Nginx. Restrict port `8080` to the instance; Uvicorn binds to `127.0.0.1` in
+   the supplied systemd unit.
+
+The application will fail at startup when `APP_ENV=ec2` is combined with static AWS
+credentials, original-content responses, prompt responses, or detailed sanitization
+logging. Model and Guardrail IDs continue to be validated before their respective
+AWS calls.

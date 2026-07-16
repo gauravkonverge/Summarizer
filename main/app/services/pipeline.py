@@ -118,23 +118,9 @@ class SummarizationPipeline:
         summary_cost = call_cost(summary_usage, self.settings)
         verifier_cost = call_cost(verification_result.usage, self.settings)
         combined_cost = call_cost(combined_usage, self.settings)
-
-        return SummarizeResponse(
-            summary=summary,
-            confidence=confidence,
-            confidence_reasoning=confidence_reasoning,
-            model_used=self.provider.model_id,
-            sanitized_messages=sanitized_messages,
-            total_pii_entities_removed=total_entities,
-            unique_pii_types_found=sorted(all_entities),
-            inference_cost=total_cost(combined_usage, self.settings),
-            inference_cost_breakdown=InferenceCostBreakdown(
-                summary_call=summary_cost,
-                verifier_call=verifier_cost,
-                total_both_calls=combined_cost,
-            ),
-            timeline_metrics=timeline,
-            llm_call_inputs=[
+        llm_call_inputs: list[LLMCallInput] = []
+        if self.settings.include_llm_call_inputs:
+            llm_call_inputs = [
                 LLMCallInput(
                     call_name="Pass 1 – Summary Generation",
                     model=self.provider.model_id,
@@ -151,5 +137,22 @@ class SummarizationPipeline:
                     system_prompt=VERIFIER_SYSTEM_PROMPT,
                     user_prompt=verification_prompt,
                 ),
-            ],
+            ]
+
+        return SummarizeResponse(
+            summary=summary,
+            confidence=confidence,
+            confidence_reasoning=confidence_reasoning,
+            model_used=self.provider.model_id,
+            sanitized_messages=sanitized_messages,
+            total_pii_entities_removed=total_entities,
+            unique_pii_types_found=sorted(all_entities),
+            inference_cost=total_cost(combined_usage, self.settings),
+            inference_cost_breakdown=InferenceCostBreakdown(
+                summary_call=summary_cost,
+                verifier_call=verifier_cost,
+                total_both_calls=combined_cost,
+            ),
+            timeline_metrics=timeline,
+            llm_call_inputs=llm_call_inputs,
         )
