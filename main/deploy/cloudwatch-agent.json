@@ -1,0 +1,82 @@
+{
+  "agent": {
+    "metrics_collection_interval": 60
+  },
+  "metrics": {
+    "namespace": "Corpay/Summarizer",
+    "append_dimensions": {
+      "InstanceId": "${aws:InstanceId}",
+      "InstanceType": "${aws:InstanceType}",
+      "AutoScalingGroupName": "${aws:AutoScalingGroupName}"
+    },
+    "aggregation_dimensions": [
+      [
+        "InstanceId"
+      ]
+    ],
+    "metrics_collected": {
+      "cpu": {
+        "measurement": [
+          "usage_active",
+          "usage_iowait"
+        ],
+        "resources": [
+          "*"
+        ],
+        "totalcpu": true
+      },
+      "mem": {
+        "measurement": [
+          "used_percent",
+          "available_percent"
+        ]
+      },
+      "disk": {
+        "measurement": [
+          "used_percent",
+          "inodes_free"
+        ],
+        "resources": [
+          "/"
+        ]
+      },
+      "diskio": {
+        "measurement": [
+          "read_bytes",
+          "write_bytes",
+          "io_time"
+        ],
+        "resources": [
+          "*"
+        ]
+      }
+    }
+  },
+  "logs": {
+    "force_flush_interval": 5,
+    "logs_collected": {
+      "files": {
+        "collect_list": [
+          {
+            "file_path": "/var/log/summarizer-api/application.log",
+            "log_group_name": "/corpay/summarizer/application",
+            "log_stream_name": "{instance_id}",
+            "retention_in_days": 30
+          },
+          {
+            "file_path": "/var/log/nginx/access.log",
+            "log_group_name": "/corpay/summarizer/nginx-access",
+            "log_stream_name": "{instance_id}",
+            "retention_in_days": 30
+          },
+          {
+            "file_path": "/var/log/nginx/error.log",
+            "log_group_name": "/corpay/summarizer/nginx-error",
+            "log_stream_name": "{instance_id}",
+            "retention_in_days": 30
+          }
+        ]
+      }
+    }
+  }
+}

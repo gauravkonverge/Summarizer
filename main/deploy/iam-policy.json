@@ -21,6 +21,29 @@
       "Resource": [
         "arn:aws:bedrock:AWS_REGION:AWS_ACCOUNT_ID:guardrail/GUARDRAIL_ID"
       ]
+    },
+    {
+      "Sid": "PublishCloudWatchMetrics",
+      "Effect": "Allow",
+      "Action": [
+        "cloudwatch:PutMetricData",
+        "ec2:DescribeTags",
+        "ec2:DescribeVolumes"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "PublishCloudWatchLogs",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:DescribeLogGroups",
+        "logs:DescribeLogStreams",
+        "logs:PutLogEvents",
+        "logs:PutRetentionPolicy"
+      ],
+      "Resource": "*"
     }
   ]
 }

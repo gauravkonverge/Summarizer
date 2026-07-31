@@ -23,6 +23,8 @@ def test_ec2_runtime_accepts_safe_configuration(monkeypatch):
         include_original_content=False,
         include_llm_call_inputs=False,
         log_sanitization_details=False,
+        auth_enabled=True,
+        cors_allowed_origins="",
     )
 
     settings.validate_runtime()
@@ -73,3 +75,21 @@ def test_runtime_rejects_unknown_environment():
 
 def test_runtime_environment_is_case_insensitive():
     Settings(app_env="LOCAL").validate_runtime()
+
+
+def test_cloudwatch_namespace_is_required_when_emf_is_enabled():
+    with pytest.raises(RuntimeError, match="CLOUDWATCH_METRICS_NAMESPACE"):
+        Settings(
+            app_env="local",
+            cloudwatch_emf_enabled=True,
+            cloudwatch_metrics_namespace=" ",
+        ).validate_runtime()
+
+
+def test_cloudwatch_environment_is_required_when_emf_is_enabled():
+    with pytest.raises(RuntimeError, match="CLOUDWATCH_ENVIRONMENT"):
+        Settings(
+            app_env="local",
+            cloudwatch_emf_enabled=True,
+            cloudwatch_environment=" ",
+        ).validate_runtime()

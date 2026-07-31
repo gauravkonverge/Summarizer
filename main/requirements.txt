@@ -3,6 +3,7 @@ uvicorn[standard]==0.30.1
 python-dotenv==1.0.1
 boto3>=1.34.131,<2.0.0
 pydantic==2.7.4
+pyjwt[crypto]==2.8.0
 httpx==0.27.0
 anyio==4.4.0
 pytest==8.2.2

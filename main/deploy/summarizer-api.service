@@ -10,7 +10,11 @@ Group=summarizer
 WorkingDirectory=/opt/summarizer-api
 EnvironmentFile=/etc/summarizer-api.env
 Environment=PYTHONUNBUFFERED=1
-ExecStart=/opt/summarizer-api/.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8080 --workers 2
+LogsDirectory=summarizer-api
+LogsDirectoryMode=0750
+StandardOutput=append:/var/log/summarizer-api/application.log
+StandardError=inherit
+ExecStart=/opt/summarizer-api/.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8080 --workers 2 --log-config /opt/summarizer-api/deploy/logging.json
 Restart=always
 RestartSec=5
 NoNewPrivileges=true

@@ -5,6 +5,7 @@ import time
 from typing import Any
 
 from app.core.config import Settings
+from app.core.observability import emit_cloudwatch_metrics
 from app.providers.base import LLMProviderError, LLMResult, TokenUsage
 
 logger = logging.getLogger(__name__)
@@ -80,6 +81,12 @@ class BedrockProvider:
                         self.settings.llm_retry_max_delay_seconds,
                     )
                     logger.warning("Bedrock request failed with %s; retrying in %.1fs", code, delay)
+                    emit_cloudwatch_metrics(
+                        self.settings,
+                        operation="Bedrock",
+                        metrics=[("BedrockRetry", 1, "Count")],
+                        properties={"error_code": code},
+                    )
                     time.sleep(delay)
                     continue
                 logger.error("Bedrock request failed with code=%s", code or "unknown", exc_info=True)

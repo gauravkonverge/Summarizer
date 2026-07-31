@@ -7,6 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes import build_router
 from app.core.config import Settings
+from app.core.observability import RequestObservabilityMiddleware
+from app.core.security import Authenticator, build_authenticator
 from app.providers.base import LLMProvider
 from app.providers.bedrock import BedrockProvider
 from app.services.guardrail import BedrockGuardrailSanitizer, Sanitizer
@@ -23,9 +25,11 @@ def create_app(
     settings: Settings | None = None,
     provider: LLMProvider | None = None,
     sanitizer: Sanitizer | None = None,
+    authenticator: Authenticator | None = None,
 ) -> FastAPI:
     resolved_settings = settings or Settings()
     resolved_settings.validate_runtime()
+    resolved_authenticator = authenticator or build_authenticator(resolved_settings)
     resolved_provider = provider or BedrockProvider(resolved_settings)
     resolved_sanitizer = sanitizer or BedrockGuardrailSanitizer(resolved_settings)
     pipeline = SummarizationPipeline(
@@ -38,13 +42,23 @@ def create_app(
         description="PII-safe conversation summarization through AWS Bedrock Guardrails.",
         version="2.0.0",
     )
+
     application.add_middleware(
-        CORSMiddleware,
-        allow_origins=["*"],
-        allow_methods=["*"],
-        allow_headers=["*"],
+        RequestObservabilityMiddleware,
+        settings=resolved_settings,
     )
-    application.include_router(build_router(pipeline))
+    cors_origins = resolved_settings.cors_allowed_origin_list()
+    if cors_origins:
+        application.add_middleware(
+            CORSMiddleware,
+            allow_origins=cors_origins,
+            allow_methods=["*"],
+            allow_headers=["*"],
+            expose_headers=["X-Request-ID"],
+        )
+    application.include_router(
+        build_router(pipeline, resolved_authenticator, resolved_settings)
+    )
     return application
 
 

@@ -31,7 +31,7 @@ def test_health_and_summarize_api_without_aws_credentials():
     )
 
     assert health_endpoint() == {"status": "ok"}
-    body = summary_endpoint(request).model_dump()
+    body = summary_endpoint(request, caller="test-client").model_dump()
     assert body["model_used"] == provider.model_id
     assert body["total_pii_entities_removed"] == 1
     assert len(body["llm_call_inputs"]) == 2

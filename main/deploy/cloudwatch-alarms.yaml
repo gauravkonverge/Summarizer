@@ -1,0 +1,158 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: CloudWatch alarms for the Corpay Bedrock Summarizer EC2 service
+
+Parameters:
+  Environment:
+    Type: String
+    Default: ec2
+    Description: Must equal CLOUDWATCH_ENVIRONMENT on the application instance.
+  InstanceId:
+    Type: AWS::EC2::Instance::Id
+  MetricsNamespace:
+    Type: String
+    Default: Corpay/Summarizer
+  AlarmTopicArn:
+    Type: String
+    Description: SNS topic ARN notified when an alarm enters the ALARM state.
+
+Resources:
+  ApiServerErrors:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: Summarizer returned at least one 5xx response in five minutes.
+      Namespace: !Ref MetricsNamespace
+      MetricName: Http5xxCount
+      Dimensions:
+        - Name: Environment
+          Value: !Ref Environment
+        - Name: Operation
+          Value: Summarize
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      DatapointsToAlarm: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions:
+        - !Ref AlarmTopicArn
+
+  BedrockThrottles:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: Bedrock throttled at least one summarization request.
+      Namespace: !Ref MetricsNamespace
+      MetricName: BedrockThrottle
+      Dimensions:
+        - Name: Environment
+          Value: !Ref Environment
+        - Name: Operation
+          Value: Summarize
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      DatapointsToAlarm: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions:
+        - !Ref AlarmTopicArn
+
+  GuardrailFailures:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: Bedrock Guardrail failed closed for at least one request.
+      Namespace: !Ref MetricsNamespace
+      MetricName: GuardrailFailure
+      Dimensions:
+        - Name: Environment
+          Value: !Ref Environment
+        - Name: Operation
+          Value: Summarize
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      DatapointsToAlarm: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions:
+        - !Ref AlarmTopicArn
+
+  HighRequestLatency:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: Summarizer p95 latency is near the 120-second proxy timeout.
+      Namespace: !Ref MetricsNamespace
+      MetricName: RequestLatency
+      Dimensions:
+        - Name: Environment
+          Value: !Ref Environment
+        - Name: Operation
+          Value: Summarize
+      ExtendedStatistic: p95
+      Period: 300
+      EvaluationPeriods: 2
+      DatapointsToAlarm: 2
+      Threshold: 110000
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+      AlarmActions:
+        - !Ref AlarmTopicArn
+
+  HighMemory:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: EC2 memory use is above 80 percent.
+      Namespace: !Ref MetricsNamespace
+      MetricName: mem_used_percent
+      Dimensions:
+        - Name: InstanceId
+          Value: !Ref InstanceId
+      Statistic: Average
+      Period: 300
+      EvaluationPeriods: 3
+      DatapointsToAlarm: 3
+      Threshold: 80
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: breaching
+      AlarmActions:
+        - !Ref AlarmTopicArn
+
+  HighDisk:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: EC2 root filesystem use is above 80 percent.
+      Namespace: !Ref MetricsNamespace
+      MetricName: disk_used_percent
+      Dimensions:
+        - Name: InstanceId
+          Value: !Ref InstanceId
+      Statistic: Average
+      Period: 300
+      EvaluationPeriods: 3
+      DatapointsToAlarm: 3
+      Threshold: 80
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: breaching
+      AlarmActions:
+        - !Ref AlarmTopicArn
+
+  InstanceStatusCheckFailed:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: EC2 system or instance status check failed.
+      Namespace: AWS/EC2
+      MetricName: StatusCheckFailed
+      Dimensions:
+        - Name: InstanceId
+          Value: !Ref InstanceId
+      Statistic: Maximum
+      Period: 60
+      EvaluationPeriods: 5
+      DatapointsToAlarm: 5
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: breaching
+      AlarmActions:
+        - !Ref AlarmTopicArn
