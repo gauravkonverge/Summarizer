@@ -31,6 +31,8 @@ class SanitizedMessage(BaseModel):
     sanitized_content: str
     pii_detected: list[str]
     pii_count: int
+    is_garbled: bool = False
+    garbled_reason: str | None = None
 
 
 class CallInferenceCost(BaseModel):
@@ -86,6 +88,7 @@ class SummarizeResponse(BaseModel):
     sanitized_messages: list[SanitizedMessage]
     total_pii_entities_removed: int
     unique_pii_types_found: list[str]
+    garbled_message_count: int = 0
     inference_cost: InferenceCost
     inference_cost_breakdown: InferenceCostBreakdown
     timeline_metrics: TimelineMetrics | None = None

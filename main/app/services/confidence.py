@@ -46,6 +46,11 @@ def rule_based_confidence(messages: list[SanitizedMessage]) -> tuple[float, str]
     if len(pii_types) >= 6:
         score -= 0.05
         reasons.append("many PII categories were sanitized")
+    garbled_count = sum(1 for message in messages if message.is_garbled)
+    if garbled_count:
+        garbled_ratio = garbled_count / len(messages)
+        score -= 0.20 if garbled_ratio >= 0.3 else 0.08
+        reasons.append(f"{garbled_count} message(s) were unreadable/garbled")
     if not reasons:
         reasons.append("conversation is sufficiently detailed with limited redaction impact")
     return round(_clamp(score), 2), "; ".join(reasons)

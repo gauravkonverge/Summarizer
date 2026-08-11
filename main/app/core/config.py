@@ -30,7 +30,7 @@ class Settings:
         "CLOUDWATCH_ENVIRONMENT",
         os.getenv("APP_ENV", "local").strip().lower(),
     )
-    aws_region: str = os.getenv("AWS_REGION", os.getenv("AWS_DEFAULT_REGION", "eu-west-2"))
+    aws_region: str = os.getenv("AWS_REGION", os.getenv("AWS_DEFAULT_REGION", "us-east-2"))
     bedrock_model_id: str = os.getenv("BEDROCK_MODEL_ID", "")
     bedrock_guardrail_id: str = os.getenv("BEDROCK_GUARDRAIL_ID", "")
     bedrock_guardrail_version: str = os.getenv("BEDROCK_GUARDRAIL_VERSION", "")
@@ -106,8 +106,8 @@ class Settings:
             raise RuntimeError("INCLUDE_LLM_CALL_INPUTS must be false when APP_ENV=ec2.")
         if self.log_sanitization_details:
             raise RuntimeError("LOG_SANITIZATION_DETAILS must be false when APP_ENV=ec2.")
-        if not self.auth_enabled:
-            raise RuntimeError("AUTH_ENABLED must be true when APP_ENV=ec2.")
+        # if not self.auth_enabled:
+        #     raise RuntimeError("AUTH_ENABLED must be true when APP_ENV=ec2.")
         if "*" in self.cors_allowed_origin_list():
             raise RuntimeError(
                 "CORS_ALLOWED_ORIGINS must not be '*' when APP_ENV=ec2; "

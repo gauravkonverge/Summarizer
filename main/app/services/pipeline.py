@@ -21,6 +21,7 @@ from app.services.prompts import (
     summary_user_prompt,
     verifier_user_prompt,
 )
+from app.services.text_quality import assess_garbled
 from app.services.timeline import timeline_metrics
 
 logger = logging.getLogger(__name__)
@@ -40,9 +41,15 @@ class SummarizationPipeline:
 
     @staticmethod
     def _conversation(messages: list[SanitizedMessage]) -> str:
-        return "\n".join(
-            f"[{message.role.upper()}]: {message.sanitized_content}" for message in messages
-        )
+        lines = []
+        for message in messages:
+            content = (
+                f"[unreadable message: {message.garbled_reason}]"
+                if message.is_garbled
+                else message.sanitized_content
+            )
+            lines.append(f"[{message.role.upper()}]: {content}")
+        return "\n".join(lines)
 
     def summarize(self, request: SummarizeRequest) -> SummarizeResponse:
         sanitized_messages: list[SanitizedMessage] = []
@@ -51,14 +58,24 @@ class SummarizationPipeline:
 
         for index, message in enumerate(request.messages, start=1):
             result = self.sanitizer.sanitize(message.content)
+            is_garbled, garbled_reason = assess_garbled(result.sanitized_text)
             sanitized = SanitizedMessage(
                 role=message.role,
                 original_content=message.content if self.settings.include_original_content else "",
                 sanitized_content=result.sanitized_text,
                 pii_detected=result.detected_entities,
                 pii_count=result.entity_count,
+                is_garbled=is_garbled,
+                garbled_reason=garbled_reason,
             )
             sanitized_messages.append(sanitized)
+            if is_garbled and self.settings.log_sanitization_details:
+                logger.info(
+                    "Garbled message detected message=%d role=%s reason=%s",
+                    index,
+                    message.role,
+                    garbled_reason,
+                )
             all_entities.update(result.detected_entities)
             total_entities += result.entity_count
             if self.settings.log_sanitization_details:
@@ -147,6 +164,7 @@ class SummarizationPipeline:
             sanitized_messages=sanitized_messages,
             total_pii_entities_removed=total_entities,
             unique_pii_types_found=sorted(all_entities),
+            garbled_message_count=sum(1 for message in sanitized_messages if message.is_garbled),
             inference_cost=total_cost(combined_usage, self.settings),
             inference_cost_breakdown=InferenceCostBreakdown(
                 summary_call=summary_cost,

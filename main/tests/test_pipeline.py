@@ -107,3 +107,35 @@ def test_pipeline_hides_original_content_and_prompts_when_disabled():
     assert response.sanitized_messages[0].original_content == ""
     assert response.sanitized_messages[0].sanitized_content == "Contact [EMAIL]"
     assert response.llm_call_inputs == []
+
+
+def test_pipeline_flags_garbled_messages_and_masks_them_in_the_prompt():
+    provider = FakeProvider()
+    pipeline = SummarizationPipeline(
+        provider=provider,
+        settings=Settings(app_env="local", bedrock_model_id=provider.model_id),
+        sanitizer=FakeSanitizer(),
+    )
+    request = SummarizeRequest.model_validate(
+        {
+            "messages": [
+                {"role": "customer", "content": "vehicle ???? status ????"},
+                {"role": "support", "content": "We will provide an order update."},
+            ],
+            "summary_style": "brief",
+            "language": "en",
+        }
+    )
+
+    response = pipeline.summarize(request)
+
+    assert response.sanitized_messages[0].is_garbled
+    assert response.sanitized_messages[0].garbled_reason
+    assert not response.sanitized_messages[1].is_garbled
+    assert response.garbled_message_count == 1
+    assert response.confidence == 0.76
+    assert "unreadable/garbled" in response.confidence_reasoning
+
+    summary_prompt = provider.calls[0]["user_prompt"]
+    assert "vehicle ????" not in summary_prompt
+    assert "[unreadable message:" in summary_prompt
