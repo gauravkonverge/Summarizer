@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: CloudWatch alarms for the Corpay Bedrock Summarizer EC2 service
+Description: CloudWatch alarms for the Corpay Summarizer EC2 service
 
 Parameters:
   Environment:
@@ -37,12 +37,12 @@ Resources:
       AlarmActions:
         - !Ref AlarmTopicArn
 
-  BedrockThrottles:
+  PortkeyThrottles:
     Type: AWS::CloudWatch::Alarm
     Properties:
-      AlarmDescription: Bedrock throttled at least one summarization request.
+      AlarmDescription: The Portkey AI Gateway throttled at least one summarization request.
       Namespace: !Ref MetricsNamespace
-      MetricName: BedrockThrottle
+      MetricName: PortkeyThrottle
       Dimensions:
         - Name: Environment
           Value: !Ref Environment

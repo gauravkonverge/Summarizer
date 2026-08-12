@@ -82,7 +82,7 @@ def build_router(
                 detail=str(exc),
             ) from exc
         except LLMProviderError as exc:
-            metric_name = "BedrockThrottle" if exc.rate_limited else "BedrockFailure"
+            metric_name = "PortkeyThrottle" if exc.rate_limited else "PortkeyFailure"
             emit_cloudwatch_metrics(
                 settings,
                 operation="Summarize",

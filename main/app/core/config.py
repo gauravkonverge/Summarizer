@@ -31,10 +31,14 @@ class Settings:
         os.getenv("APP_ENV", "local").strip().lower(),
     )
     aws_region: str = os.getenv("AWS_REGION", os.getenv("AWS_DEFAULT_REGION", "us-east-2"))
-    bedrock_model_id: str = os.getenv("BEDROCK_MODEL_ID", "")
     bedrock_guardrail_id: str = os.getenv("BEDROCK_GUARDRAIL_ID", "")
     bedrock_guardrail_version: str = os.getenv("BEDROCK_GUARDRAIL_VERSION", "")
     bedrock_endpoint_url: str | None = os.getenv("BEDROCK_ENDPOINT_URL") or None
+    llm_model_id: str = os.getenv("LLM_MODEL_ID", "")
+    portkey_api_key: str = os.getenv("PORTKEY_API_KEY", "")
+    portkey_provider: str = os.getenv("PORTKEY_PROVIDER", "")
+    portkey_virtual_key: str = os.getenv("PORTKEY_VIRTUAL_KEY", "")
+    portkey_base_url: str | None = os.getenv("PORTKEY_BASE_URL") or None
     llm_max_attempts: int = int(os.getenv("LLM_MAX_ATTEMPTS", "3"))
     llm_retry_base_delay_seconds: float = float(os.getenv("LLM_RETRY_BASE_DELAY_SECONDS", "1.0"))
     llm_retry_max_delay_seconds: float = float(os.getenv("LLM_RETRY_MAX_DELAY_SECONDS", "8.0"))
@@ -142,8 +146,12 @@ class Settings:
             raise RuntimeError("OIDC_CLOCK_SKEW_SECONDS must not be negative.")
 
     def validate_for_live_inference(self) -> None:
-        if not self.bedrock_model_id.strip():
-            raise RuntimeError("BEDROCK_MODEL_ID is not configured.")
+        if not self.portkey_api_key.strip():
+            raise RuntimeError("PORTKEY_API_KEY is not configured.")
+        if not self.portkey_provider.strip() and not self.portkey_virtual_key.strip():
+            raise RuntimeError("PORTKEY_PROVIDER or PORTKEY_VIRTUAL_KEY must be configured.")
+        if not self.llm_model_id.strip():
+            raise RuntimeError("LLM_MODEL_ID is not configured.")
         if self.llm_max_attempts < 1:
             raise RuntimeError("LLM_MAX_ATTEMPTS must be at least 1.")
 

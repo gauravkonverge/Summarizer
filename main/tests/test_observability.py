@@ -99,7 +99,7 @@ def test_summarize_endpoint_emits_aggregate_metrics(monkeypatch):
     app = create_app(
         settings=Settings(
             app_env="local",
-            bedrock_model_id=provider.model_id,
+            llm_model_id=provider.model_id,
             include_llm_call_inputs=False,
             cloudwatch_emf_enabled=True,
         ),

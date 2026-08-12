@@ -1,4 +1,4 @@
-"""FastAPI application factory and default AWS Bedrock application."""
+"""FastAPI application factory wiring the Portkey AI Gateway by default."""
 
 import logging
 
@@ -10,7 +10,7 @@ from app.core.config import Settings
 from app.core.observability import RequestObservabilityMiddleware
 from app.core.security import Authenticator, build_authenticator
 from app.providers.base import LLMProvider
-from app.providers.bedrock import BedrockProvider
+from app.providers.portkey import PortkeyProvider
 from app.services.guardrail import BedrockGuardrailSanitizer, Sanitizer
 from app.services.pipeline import SummarizationPipeline
 
@@ -30,7 +30,7 @@ def create_app(
     resolved_settings = settings or Settings()
     resolved_settings.validate_runtime()
     resolved_authenticator = authenticator or build_authenticator(resolved_settings)
-    resolved_provider = provider or BedrockProvider(resolved_settings)
+    resolved_provider = provider or PortkeyProvider(resolved_settings)
     resolved_sanitizer = sanitizer or BedrockGuardrailSanitizer(resolved_settings)
     pipeline = SummarizationPipeline(
         provider=resolved_provider,
@@ -39,7 +39,7 @@ def create_app(
     )
     application = FastAPI(
         title=resolved_settings.app_name,
-        description="PII-safe conversation summarization through AWS Bedrock Guardrails.",
+        description="PII-safe conversation summarization via the Portkey AI Gateway, with PII masking through AWS Bedrock Guardrails.",
         version="2.0.0",
     )
 

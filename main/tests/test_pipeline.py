@@ -11,7 +11,7 @@ def test_pipeline_preserves_response_contract_and_combines_usage():
     provider = FakeProvider()
     settings = Settings(
         app_env="local",
-        bedrock_model_id=provider.model_id,
+        llm_model_id=provider.model_id,
         include_original_content=True,
         include_llm_call_inputs=True,
         input_cost_per_million_tokens_usd=1.0,
@@ -64,7 +64,7 @@ def test_large_repository_sample_runs_without_live_credentials():
         provider=provider,
         settings=Settings(
             app_env="local",
-            bedrock_model_id=provider.model_id,
+            llm_model_id=provider.model_id,
         ),
         sanitizer=FakeSanitizer(),
     )
@@ -84,7 +84,7 @@ def test_pipeline_hides_original_content_and_prompts_when_disabled():
         provider=provider,
         settings=Settings(
             app_env="ec2",
-            bedrock_model_id=provider.model_id,
+            llm_model_id=provider.model_id,
             include_original_content=False,
             include_llm_call_inputs=False,
             log_sanitization_details=False,
@@ -113,7 +113,7 @@ def test_pipeline_flags_garbled_messages_and_masks_them_in_the_prompt():
     provider = FakeProvider()
     pipeline = SummarizationPipeline(
         provider=provider,
-        settings=Settings(app_env="local", bedrock_model_id=provider.model_id),
+        settings=Settings(app_env="local", llm_model_id=provider.model_id),
         sanitizer=FakeSanitizer(),
     )
     request = SummarizeRequest.model_validate(
