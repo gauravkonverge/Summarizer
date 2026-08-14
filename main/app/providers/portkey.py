@@ -1,7 +1,6 @@
 """Portkey AI Gateway implementation using the OpenAI-compatible chat completions API."""
 
 import logging
-import os
 import time
 from typing import Any
 
@@ -32,19 +31,6 @@ class PortkeyProvider:
                 kwargs["virtual_key"] = self.settings.portkey_virtual_key
             if self.settings.portkey_base_url:
                 kwargs["base_url"] = self.settings.portkey_base_url
-
-            # Forward AWS credentials from our own .env instead of relying on
-            # a credential set stored in the Portkey dashboard integration, so
-            # refreshing temporary STS creds only requires updating .env.
-            access_key = os.getenv("AWS_ACCESS_KEY_ID")
-            secret_key = os.getenv("AWS_SECRET_ACCESS_KEY")
-            if access_key and secret_key:
-                kwargs["aws_access_key_id"] = access_key
-                kwargs["aws_secret_access_key"] = secret_key
-                session_token = os.getenv("AWS_SESSION_TOKEN")
-                if session_token:
-                    kwargs["aws_session_token"] = session_token
-                kwargs["aws_region"] = self.settings.aws_region
 
             self._client = Portkey(**kwargs)
         return self._client
