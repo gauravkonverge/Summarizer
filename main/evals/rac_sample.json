@@ -1,0 +1,33 @@
+{
+  "messages": [
+    {"role": "support", "timestamp": "2026-03-24T14:54:00", "sender": "RAC Anari Brown-Chumber", "content": "Booking request created: 88233658/1."},
+    {"role": "support", "timestamp": "2026-03-24T16:10:00", "sender": "System", "content": "The jobsheet associated with this VOR incident has been completed. Please review the incident to ensure it is current and up to date."},
+    {"role": "support", "timestamp": "2026-03-25T16:53:00", "sender": "RAC Rayyan Yaqub", "content": "Vehicle off road. To book a taxi over the phone, call CMAC and quote reference 48102825."},
+    {"role": "support", "timestamp": "2026-03-25T19:31:00", "sender": "RAC Saida Tali", "content": "Authority deferred update recorded."},
+    {"role": "support", "timestamp": "2026-04-20T14:21:00", "sender": "RAC Aysha Begum", "content": "A MMR case has been raised. Vehicle will be repaired by IAA."},
+    {"role": "customer", "timestamp": "2026-04-21T10:00:00", "sender": "RAC Aysha Begum", "content": "Hi, when are you looking to collect this vehicle?"},
+    {"role": "support", "timestamp": "2026-04-21T10:32:00", "sender": "1link External User", "content": "We are awaiting decision from the case manager as this is an MMR case."},
+    {"role": "customer", "timestamp": "2026-04-24T12:00:00", "sender": "RAC Kam Sanghera", "content": "Has a decision been made by the case manager?"},
+    {"role": "support", "timestamp": "2026-04-24T12:35:00", "sender": "1link External User", "content": "No, it does not look as if we have been instructed yet."},
+    {"role": "support", "timestamp": "2026-04-25T12:19:00", "sender": "RAC Ameer Mahmood", "content": "Booking request created: 88269240/1."},
+    {"role": "support", "timestamp": "2026-04-25T12:21:00", "sender": "TOMMY KEEGAN", "content": "Vehicle had a fault with EC. Customer was advised to take vehicle back to branch. A new booking was created without hire."},
+    {"role": "customer", "timestamp": "2026-04-28T10:00:00", "sender": "RAC Rayyan Yaqub", "content": "Do you have an update on this one?"},
+    {"role": "support", "timestamp": "2026-04-28T12:18:00", "sender": "1link External User", "content": "We have had no instruction to collect this vehicle."},
+    {"role": "customer", "timestamp": "2026-05-01T09:00:00", "sender": "RAC Katrina Field", "content": "Work is now authorised. When will you be collecting this vehicle, or is the vehicle on site?"},
+    {"role": "support", "timestamp": "2026-05-01T09:37:00", "sender": "1link External User", "content": "We are attempting to contact the dealer to arrange collection. We are hoping for Tuesday or Wednesday as long as the vehicle is not stripped."},
+    {"role": "customer", "timestamp": "2026-05-06T11:00:00", "sender": "RAC Zainab Hussain", "content": "Can you please provide an update?"},
+    {"role": "support", "timestamp": "2026-05-06T11:59:00", "sender": "1link External User", "content": "The vehicle is on site and waiting for a ramp."},
+    {"role": "customer", "timestamp": "2026-05-12T09:00:00", "sender": "RAC Pardeep Jaj", "content": "Do you have an update on repairs, please?"},
+    {"role": "support", "timestamp": "2026-05-12T10:19:00", "sender": "1link External User", "content": "Vehicle is on site awaiting ramp to start; repair start expected in 15-20 working days from collection."},
+    {"role": "customer", "timestamp": "2026-05-14T15:00:00", "sender": "RAC Ramjit Deo", "content": "Please confirm the earliest workshop date available, expected repair duration, and estimated completion date."},
+    {"role": "support", "timestamp": "2026-05-14T15:25:00", "sender": "1link External User", "content": "Quoted timeline is 15-20 days from arrival on site to start; this takes us to the first week in June."},
+    {"role": "customer", "timestamp": "2026-05-29T18:00:00", "sender": "RAC Aurelia Mailat", "content": "Any update on this please?"},
+    {"role": "support", "timestamp": "2026-06-01T08:40:00", "sender": "1link External User", "content": "Vehicle is on site awaiting ramp to start."},
+    {"role": "customer", "timestamp": "2026-06-03T10:00:00", "sender": "RAC Alisha Khan", "content": "Can you please provide a repair update?"},
+    {"role": "support", "timestamp": "2026-06-03T11:28:00", "sender": "1link External User", "content": "Vehicle remains on site awaiting a ramp to start."},
+    {"role": "customer", "timestamp": "2026-06-09T11:00:00", "sender": "RAC Kam Sanghera", "content": "Do you have an ETA for when the ramp will start?"},
+    {"role": "support", "timestamp": "2026-06-09T12:18:00", "sender": "1link External User", "content": "Vehicle arrived on site on 06/05 and was due to start in 20-25 working days from that date."}
+  ],
+  "summary_style": "detailed",
+  "language": "en"
+}

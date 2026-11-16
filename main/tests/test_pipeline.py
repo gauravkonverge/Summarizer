@@ -139,3 +139,105 @@ def test_pipeline_flags_garbled_messages_and_masks_them_in_the_prompt():
     summary_prompt = provider.calls[0]["user_prompt"]
     assert "vehicle ????" not in summary_prompt
     assert "[unreadable message:" in summary_prompt
+
+
+def _request(contents: list[str]) -> SummarizeRequest:
+    return SummarizeRequest.model_validate(
+        {
+            "messages": [
+                {
+                    "role": "customer",
+                    "content": content,
+                    "timestamp": f"2026-07-13T10:{index:02d}:00Z",
+                    "sender": "Customer",
+                }
+                for index, content in enumerate(contents)
+            ],
+            "summary_style": "brief",
+            "language": "en",
+        }
+    )
+
+
+def test_guardrail_calls_run_concurrently_and_preserve_message_order():
+    import threading
+
+    from app.services.guardrail import SanitizationResult
+
+    contents = [f"message {index}" for index in range(6)]
+    # The barrier only releases once 3 calls are in flight at the same time;
+    # with sequential sanitization it would time out.
+    barrier = threading.Barrier(3, timeout=5)
+
+    class SlowSanitizer:
+        def sanitize(self, text: str) -> SanitizationResult:
+            barrier.wait()
+            return SanitizationResult(sanitized_text=text.upper(), original_text=text)
+
+    provider = FakeProvider()
+    pipeline = SummarizationPipeline(
+        provider=provider,
+        settings=Settings(bedrock_model_id=provider.model_id, guardrail_max_concurrency=3),
+        sanitizer=SlowSanitizer(),
+    )
+
+    response = pipeline.summarize(_request(contents))
+
+    assert [m.sanitized_content for m in response.sanitized_messages] == [
+        content.upper() for content in contents
+    ]
+
+
+def test_guardrail_failure_fails_closed_without_calling_the_model():
+    import pytest
+
+    from app.services.guardrail import SanitizationError
+
+    class FailingSanitizer(FakeSanitizer):
+        def sanitize(self, text):
+            if text == "bad":
+                raise SanitizationError("blocked")
+            return super().sanitize(text)
+
+    provider = FakeProvider()
+    pipeline = SummarizationPipeline(
+        provider=provider,
+        settings=Settings(bedrock_model_id=provider.model_id, guardrail_max_concurrency=4),
+        sanitizer=FailingSanitizer(),
+    )
+
+    with pytest.raises(SanitizationError):
+        pipeline.summarize(_request(["ok", "bad", "ok", "ok"]))
+    assert provider.calls == []
+
+
+def test_stage_latency_metrics_are_emitted(monkeypatch):
+    emitted = []
+    monkeypatch.setattr(
+        "app.services.pipeline.emit_cloudwatch_metrics",
+        lambda _settings, **event: emitted.append(event),
+    )
+    provider = FakeProvider()
+    pipeline = SummarizationPipeline(
+        provider=provider,
+        settings=Settings(bedrock_model_id=provider.model_id),
+        sanitizer=FakeSanitizer(),
+    )
+
+    pipeline.summarize(_request(["hello", "world"]))
+
+    assert len(emitted) == 1
+    event = emitted[0]
+    assert event["operation"] == "Summarize"
+    assert event["properties"] == {"message_count": 2}
+    metrics = {name: (value, unit) for name, value, unit in event["metrics"]}
+    assert set(metrics) == {
+        "GuardrailLatency",
+        "SummaryLatency",
+        "VerifierLatency",
+        "SummaryFallbackCount",
+    }
+    assert metrics["SummaryFallbackCount"] == (0, "Count")
+    for name in ("GuardrailLatency", "SummaryLatency", "VerifierLatency"):
+        value, unit = metrics[name]
+        assert value >= 0 and unit == "Milliseconds"

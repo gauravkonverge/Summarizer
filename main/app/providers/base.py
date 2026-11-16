@@ -41,6 +41,12 @@ class LLMProvider(Protocol):
         *,
         system_prompt: str,
         user_prompt: str,
-        temperature: float,
         max_tokens: int,
-    ) -> LLMResult: ...
+        temperature: float | None = None,
+    ) -> LLMResult:
+        """Run one completion.
+
+        ``temperature`` is optional: newer Claude models (e.g. Claude Haiku 5.5)
+        reject sampling parameters, so providers must omit it when it is None.
+        """
+        ...

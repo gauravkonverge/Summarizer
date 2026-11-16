@@ -1,0 +1,170 @@
+[
+  {
+    "model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    "summary_ms": [
+      7263.197700001911,
+      6193.419499999436
+    ],
+    "error": null,
+    "json_ok": true,
+    "out_tokens": 239,
+    "summary": "A vehicle off road (VOR) incident was logged with reference 48102825, and an MMR case was raised with the vehicle designated for repair by IAA. Initial booking requests were created (88233658/1 and 88269240/1), with the latter noted as being without hire due to an EC fault that required the customer to return the vehicle to branch. The customer repeatedly inquired about collection timing and repair progress. Support indicated they were awaiting instruction from the case manager before collection could proceed. Once work was authorized, support arranged collection for Tuesday or Wednesday, contingent on the vehicle not being stripped. The vehicle arrived on site on 06/05 and has been awaiting an available ramp to begin repairs. The quoted timeline for repair start was consistently stated as 15-20 working days (later mentioned as 20-25 working days) from arrival, with an estimated start in the first week of June. Throughout multiple follow-ups, support confirmed the vehicle remained on site awaiting a ramp, with no repair work yet commenced.",
+    "verifier_ms": 5280.703500000527,
+    "verifier_parsed": true,
+    "verifier_score": 0.92
+  },
+  {
+    "model": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "summary_ms": [
+      3122.00970000049,
+      2599.0644000012253
+    ],
+    "error": null,
+    "json_ok": true,
+    "out_tokens": 275,
+    "summary": "Support has been managing multiple vehicle repair cases. For the first case, booking request 88233658/1 was created for a vehicle off road (VOR) incident with an associated jobsheet. A taxi booking reference (48102825) was provided for alternative transport, and an MMR (likely Major Mechanical Repair) case was raised with IAA to handle repairs. The case manager's decision on collection timing was pending. For a second case, booking request 88269240/1 was created for a vehicle with an EC (Engine Control) fault; the customer was advised to return it to the branch, and a new booking was created without hire. Work was subsequently authorised. Support attempted to contact the dealer to arrange collection, targeting Tuesday or Wednesday, contingent on the vehicle not being stripped. The vehicle eventually arrived on site on 06/05 and was awaiting a ramp to begin repairs. Quoted repair timeline is 15-20 working days from arrival, with expected completion in the first week of June. Throughout the conversation, the customer requested multiple updates on collection schedules, repair status, workshop availability, and repair duration, to which support consistently reported the vehicle was on site awaiting ramp availability to commence work.",
+    "verifier_ms": 2734.669199999189,
+    "verifier_parsed": true,
+    "verifier_score": 0.92
+  },
+  {
+    "model": "us.anthropic.claude-haiku-5-5",
+    "summary_ms": [
+      5922.353599999042,
+      6050.490300000092
+    ],
+    "error": null,
+    "json_ok": true,
+    "out_tokens": 1065,
+    "summary": "This support thread concerns a vehicle off road (VOR) and a subsequent MMR repair case. Booking request 88233658/1 was created, and the jobsheet for the VOR incident was marked complete, with a request to review the incident for accuracy. Customers were told to book a taxi over the phone through CMAC, quoting reference 48102825. An authority deferred update was recorded. An MMR case was raised, with the vehicle to be repaired by IAA. While the case awaited a decision from the case manager, the customer asked about collection timing and whether a decision had been made. Support replied that no instruction had yet been received. A second booking request, 88269240/1, was created after a fault with EC: the customer was advised to return the vehicle to the branch, and the new booking was made without hire. Support again reported no instruction to collect. Once work was authorised, support said they were contacting the dealer to arrange collection, hoping for Tuesday or Wednesday provided the vehicle was not stripped. The vehicle was later recorded as on site and waiting for a ramp. Support gave two timelines that do not fully agree. The first stated repair start would be 15-20 working days from collection, and later clarified as 15-20 days from arrival on site, which would reach the first week in June. The second stated the vehicle arrived on site on 06/05 and was due to start in 20-25 working days from that date. The thread repeatedly reports that the vehicle remains on site awaiting a ramp. No confirmed ramp start date, repair completion date, or final collection date is recorded, and the 06/05 date format is not specified.",
+    "verifier_ms": 5237.369700000272,
+    "verifier_parsed": true,
+    "verifier_score": 0.86
+  },
+  {
+    "model": "us.amazon.nova-2-lite-v1:0",
+    "summary_ms": [
+      2185.879600001499,
+      1927.9607999997097
+    ],
+    "error": null,
+    "json_ok": true,
+    "out_tokens": 238,
+    "summary": "The conversation involves a support team and a customer discussing the status of a vehicle that is off-road due to a fault with the EC system. A booking request (88233658/1) was created, and a jobsheet for a VOR incident has been completed. The vehicle is classified as an MMR case, and repairs will be handled by IAA. The customer inquired about the collection and repair timeline multiple times. The support team indicated that they are awaiting a decision from the case manager and have not yet received instructions to collect the vehicle. A new booking request (88269240/1) was created without hire. The support team later confirmed that the vehicle is on site, awaiting a ramp to begin repairs. They estimated the repair duration to be 15-20 working days from the collection date, with the repair start expected in the first week of June. The vehicle arrived on site on 06/05 and was due to start repairs in 20-25 working days from that date. The customer repeatedly asked for updates, but the support team consistently stated that the vehicle remains on site awaiting a ramp to start.",
+    "verifier_ms": 1616.5023000030487,
+    "verifier_parsed": true,
+    "verifier_score": 0.95
+  },
+  {
+    "model": "us.amazon.nova-pro-v1:0",
+    "summary_ms": [
+      2635.88190000155,
+      2279.41490000012
+    ],
+    "error": null,
+    "json_ok": true,
+    "out_tokens": 251,
+    "summary": "The conversation involves a customer and support personnel discussing a vehicle repair process. Initially, a booking request (88233658/1) was created, and the vehicle was noted to be off the road, with instructions to call CMAC for a taxi. An MMR case was raised, indicating the vehicle would be repaired by IAA. The customer inquired about the collection and repair timeline, to which support responded that they were awaiting instructions from the case manager. Another booking request (88269240/1) was created after a fault with the vehicle's EC was identified, and the customer was advised to return the vehicle to the branch. The support team later confirmed that work was authorized and they were attempting to contact the dealer for collection, aiming for Tuesday or Wednesday. The vehicle was eventually confirmed to be on site awaiting a ramp, with repair start expected in 15-20 working days from collection. The customer repeatedly requested updates on the repair process, and support consistently reported that the vehicle remained on site awaiting a ramp, with an expected repair start timeline of 20-25 working days from its arrival on 06/05.",
+    "verifier_ms": 1730.3022999985842,
+    "verifier_parsed": true,
+    "verifier_score": 0.85
+  },
+  {
+    "model": "us.amazon.nova-micro-v1:0",
+    "summary_ms": [
+      1896.3146000023698,
+      1339.4296000005852
+    ],
+    "error": null,
+    "json_ok": true,
+    "out_tokens": 266,
+    "summary": "The conversation details a series of support interactions regarding vehicle off-road incidents and repair bookings. An initial booking request was created for reference 88233658/1, and a jobsheet was completed for a Vehicle Off Road (VOR) incident. A taxi was booked by quoting reference 48102825. An MMR case was raised and the vehicle will be repaired by IAA. The customer inquired about collection timelines, and it was mentioned that a decision from the case manager was pending. Another booking request was made for reference 88269240/1 due to an EC fault. The vehicle was advised to be taken back to the branch. The customer frequently asked for updates on collection and repair timelines. The support indicated the vehicle was on site, waiting for a ramp to start repairs, with an expected repair duration of 15-20 working days from collection. The earliest workshop date available was projected to be in the first week of June. The vehicle arrived on site on 06/05 and was due to start repairs in 20-25 working days from that date. Despite customer requests for updates, the repair status remained unchanged as the vehicle continued to wait for a ramp to start.",
+    "verifier_ms": 1086.426300000312,
+    "verifier_parsed": true,
+    "verifier_score": 0.9
+  },
+  {
+    "model": "us.meta.llama4-maverick-17b-instruct-v1:0",
+    "summary_ms": [
+      2066.5292000012414,
+      1348.7530000020342
+    ],
+    "error": null,
+    "json_ok": true,
+    "out_tokens": 168,
+    "summary": "A vehicle was booked for repair due to being off the road, with a reference number 48102825. A MMR case was raised and the vehicle was to be repaired by IAA. The customer inquired about the collection of the vehicle multiple times, and was informed that the decision from the case manager was awaited initially, and later that there were attempts to contact the dealer to arrange collection. The vehicle was eventually collected and arrived on site on 06/05, where it remained awaiting a ramp to start repairs. The expected repair start date was 20-25 working days after arrival, and the quoted repair duration was 15-20 working days. The customer received multiple updates on the status of the vehicle and repairs, with the final expected completion date being in the first week of June.",
+    "verifier_ms": 1067.3194000009971,
+    "verifier_parsed": true,
+    "verifier_score": 0.95
+  },
+  {
+    "model": "us.meta.llama3-3-70b-instruct-v1:0",
+    "summary_ms": [
+      2204.6479000018735,
+      1942.6230999997642
+    ],
+    "error": null,
+    "json_ok": true,
+    "out_tokens": 199,
+    "summary": "A vehicle was taken off the road and a booking request was created. The jobsheet associated with the incident was completed, and a Major Maintenance and Repair (MMR) case was raised, with the vehicle to be repaired by IAA. The customer inquired about the collection of the vehicle, and support staff responded that they were awaiting a decision from the case manager. After authorization was given, support staff attempted to contact the dealer to arrange collection, aiming for Tuesday or Wednesday. The vehicle was eventually collected and taken to the site, where it waited for a ramp to start repairs. The expected repair duration was 15-20 working days from collection, with the quoted timeline suggesting completion in the first week of June. The vehicle remained on site awaiting a ramp to start, with the support staff providing regular updates to the customer. The vehicle arrived on site on 06/05 and was due to start repairs in 20-25 working days from that date.",
+    "verifier_ms": 1234.1077999990375,
+    "verifier_parsed": true,
+    "verifier_score": 0.9
+  },
+  {
+    "model": "openai.gpt-oss-120b-1:0",
+    "summary_ms": [
+      3604.844099998445,
+      3121.0589000002074
+    ],
+    "error": null,
+    "json_ok": true,
+    "out_tokens": 468,
+    "summary": "Support logged two booking requests (IDs 88233658/1 and 88269240/1) and noted that a jobsheet for a VOR incident was completed. The vehicle was reported off\u2011road, with instructions to book a taxi via CMAC using reference 48102825, and an authority\u2011deferred update was recorded. An MMR case was raised, with the vehicle slated for repair by IAA, but no decision from the case manager had been received. A separate issue involved a fault with the EC system; the customer was advised to return the vehicle to the branch and a new booking (without hire) was created, though no collection instruction had been given. After the work was authorized, support attempted to contact the dealer to arrange collection, targeting a Tuesday or Wednesday, provided the vehicle was not stripped. The vehicle is currently on\u2011site awaiting a ramp, with the repair expected to start 15\u201120 working days after collection, pushing the earliest workshop date to the first week of June. The vehicle arrived on site on 06/05 and is due to start repairs in 20\u201125 working days from that arrival date.",
+    "verifier_ms": 5353.2735999979195,
+    "verifier_parsed": true,
+    "verifier_score": 0.96
+  },
+  {
+    "model": "qwen.qwen3-next-80b-a3b",
+    "summary_ms": [
+      3692.4255000012636,
+      2411.7934000023524
+    ],
+    "error": null,
+    "json_ok": true,
+    "out_tokens": 234,
+    "summary": "A booking request (88233658/1) was created for a VOR incident, and the associated jobsheet has been completed; however, the vehicle remains off-road and collection requires coordination via CMAC using reference 48102825. An MMR case was raised, with repairs to be handled by IAA, and no decision has yet been received from the case manager regarding collection. A further booking (88269240/1) was created after a fault with the EC led to the customer being advised to return the vehicle to the branch without hire. As of the latest update, the vehicle is on site awaiting a ramp to begin repairs, with no collection instructions received. The vehicle arrived on site on 06/05, and repairs are expected to commence 20-25 working days after arrival, placing the estimated start date in the first week of June, with an overall repair duration of 15-20 working days from that point. No updates have been received on the ramp\u2019s availability or repair progression beyond this timeline.",
+    "verifier_ms": 2209.818199997244,
+    "verifier_parsed": true,
+    "verifier_score": 0.95
+  },
+  {
+    "model": "mistral.ministral-3-14b-instruct",
+    "summary_ms": [
+      20116.602300000523,
+      1580.8097000008274
+    ],
+    "error": null,
+    "json_ok": true,
+    "out_tokens": 310,
+    "summary": "{\n  \"summary\": \"\nThe conversation recorded multiple case updates and interactions regarding vehicle incidents and repairs managed by a support team. Two booking requests were referenced (**88233658/1** and **88269240/1**). The first incident involving **Booking 88233658/1** was related to a **VOR (Vehicle Off Road)** issue where the associated jobsheet was already completed. The vehicle had an undefined fault requiring a **MMR (Major Mechanical Repair) case**, deferred by authority, with repairs scheduled to be handled by **IAA**. Collection was awaiting decision from the case manager, with no updates provided.\n\nThe second incident (**Booking 88269240/1**) involved an **electric/electronic control (EC) fault**. The customer was advised to return the vehicle to the branch without hire, and a new booking was created. Master updates regarding this case showed no prior collection instructions but, once work was authorized, the vehicle remained on site but needed a ramp to begin repairs. Collection occurred on **06/05**, with expected repair initiation estimated at **20-25 working days** from that date. Repair timelines quoted a further **15-20 working days** after ramp initiation, leading to a target completion date in the **first week of June**. Subsequent requests for repair updates revealed persistent delays due to the vehicle **awaiting ramp access**.\n\"\n}",
+    "verifier_ms": 2281.534899997496,
+    "verifier_parsed": false,
+    "verifier_score": 0.5
+  },
+  {
+    "model": "google.gemma-3-27b-it",
+    "summary_ms": [
+      3166.150499997457,
+      2719.8480000006384
+    ],
+    "error": null,
+    "json_ok": true,
+    "out_tokens": 226,
+    "summary": "A booking request was initially created with reference 88233658/1. The vehicle was off-road and an MMR case was raised, with repairs to be carried out by IAA. The customer inquired about collection arrangements, but collection was dependent on a decision from a case manager which was initially pending. A second booking request was created with reference 88269240/1 after a fault with the vehicle's EC; a new booking was created without hire. Work was later authorised, and collection was arranged with a dealer, potentially on Tuesday or Wednesday, contingent on the vehicle not being stripped. The vehicle was then confirmed to be on site awaiting a ramp for repairs. The repair start was initially expected within 15-20 working days from collection, targeting completion in the first week of June. The estimated timeline was later specified as 20-25 working days from arrival on site (06/05). As of the latest message, the vehicle remains on site awaiting a ramp to begin repairs.",
+    "verifier_ms": 1572.4047999974573,
+    "verifier_parsed": true,
+    "verifier_score": 0.95
+  }
+]

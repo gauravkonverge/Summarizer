@@ -38,6 +38,10 @@ class Settings:
     llm_max_attempts: int = int(os.getenv("LLM_MAX_ATTEMPTS", "3"))
     llm_retry_base_delay_seconds: float = float(os.getenv("LLM_RETRY_BASE_DELAY_SECONDS", "1.0"))
     llm_retry_max_delay_seconds: float = float(os.getenv("LLM_RETRY_MAX_DELAY_SECONDS", "8.0"))
+    # Per-request cap on concurrent ApplyGuardrail calls. Keep within the
+    # account's ApplyGuardrail TPS quota given expected request concurrency.
+    guardrail_max_concurrency: int = int(os.getenv("GUARDRAIL_MAX_CONCURRENCY", "8"))
+    aws_max_pool_connections: int = int(os.getenv("AWS_MAX_POOL_CONNECTIONS", "50"))
     cloudwatch_emf_enabled: bool = _env_bool("CLOUDWATCH_EMF_ENABLED", False)
     cloudwatch_metrics_namespace: str = os.getenv(
         "CLOUDWATCH_METRICS_NAMESPACE", "Corpay/Summarizer"

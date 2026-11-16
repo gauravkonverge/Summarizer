@@ -4,6 +4,7 @@ import logging
 import time
 from typing import Any
 
+from app.core.aws import bedrock_runtime_client
 from app.core.config import Settings
 from app.core.observability import emit_cloudwatch_metrics
 from app.providers.base import LLMProviderError, LLMResult, TokenUsage
@@ -25,16 +26,13 @@ class BedrockProvider:
 
     def _get_client(self):
         if self._client is None:
-            import boto3
-
-            kwargs: dict[str, Any] = {
-                "service_name": "bedrock-runtime",
-                "region_name": self.settings.aws_region,
-            }
-            if self.settings.bedrock_endpoint_url:
-                kwargs["endpoint_url"] = self.settings.bedrock_endpoint_url
-            self._client = boto3.client(**kwargs)
+            # complete() has its own retry loop with metrics; disable SDK retries.
+            self._client = bedrock_runtime_client(self.settings, sdk_retries=False)
         return self._client
+
+    def warm_up(self) -> None:
+        """Create the client ahead of the first request."""
+        self._get_client()
 
     @staticmethod
     def _error_code(exc: Exception) -> str:
@@ -46,10 +44,13 @@ class BedrockProvider:
         *,
         system_prompt: str,
         user_prompt: str,
-        temperature: float,
         max_tokens: int,
+        temperature: float | None = None,
     ) -> LLMResult:
         self.settings.validate_for_live_inference()
+        inference_config: dict[str, Any] = {"maxTokens": max_tokens}
+        if temperature is not None:
+            inference_config["temperature"] = temperature
         attempts = max(1, self.settings.llm_max_attempts)
         for attempt in range(1, attempts + 1):
             try:
@@ -57,7 +58,7 @@ class BedrockProvider:
                     modelId=self.model_id,
                     system=[{"text": system_prompt}],
                     messages=[{"role": "user", "content": [{"text": user_prompt}]}],
-                    inferenceConfig={"temperature": temperature, "maxTokens": max_tokens},
+                    inferenceConfig=inference_config,
                 )
                 blocks = response.get("output", {}).get("message", {}).get("content", [])
                 text = "\n".join(

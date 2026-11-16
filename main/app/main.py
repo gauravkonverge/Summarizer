@@ -1,5 +1,6 @@
 """FastAPI application factory and default AWS Bedrock application."""
 
+from contextlib import asynccontextmanager
 import logging
 
 from fastapi import FastAPI
@@ -18,6 +19,20 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
 )
+logger = logging.getLogger(__name__)
+
+
+def _warm_up(*components: object) -> None:
+    """Create AWS clients at startup so the first request does not pay for it."""
+    for component in components:
+        warm_up = getattr(component, "warm_up", None)
+        if warm_up is None:
+            continue
+        try:
+            warm_up()
+        except Exception:
+            # Not fatal: the client is created lazily on first use instead.
+            logger.warning("Startup warm-up failed for %s", type(component).__name__, exc_info=True)
 
 
 def create_app(
@@ -37,7 +52,14 @@ def create_app(
         settings=resolved_settings,
         sanitizer=resolved_sanitizer,
     )
+
+    @asynccontextmanager
+    async def lifespan(_app: FastAPI):
+        _warm_up(resolved_provider, resolved_sanitizer)
+        yield
+
     application = FastAPI(
+        lifespan=lifespan,
         title=resolved_settings.app_name,
         description="PII-safe conversation summarization through AWS Bedrock Guardrails.",
         version="2.0.0",

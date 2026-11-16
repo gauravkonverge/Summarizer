@@ -1,0 +1,1322 @@
+{
+  "samples": [
+    {
+      "id": "S1-windscreen-brief",
+      "description": "Short; brief style; phone number PII; plan changes from repair to replacement",
+      "key_facts": [
+        "Chip in windscreen grew into a crack, so repair was replaced by a full windscreen replacement",
+        "Replacement booked for 12 August at the customer's home address",
+        "ADAS camera calibration is required after replacement",
+        "Customer paid a GBP 95 excess"
+      ],
+      "traps": [
+        "Must not say the windscreen was repaired; the final plan is replacement, and it has not happened yet"
+      ],
+      "request": {
+        "summary_style": "brief",
+        "language": "en",
+        "messages": [
+          {
+            "role": "customer",
+            "timestamp": "2026-08-04T09:12:00",
+            "sender": "Driver",
+            "content": "Hi, a stone has chipped my windscreen on the M6. Can it be repaired? Call me on 07700 900123."
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-08-04T09:40:00",
+            "sender": "Glass Desk",
+            "content": "Thanks. A chip smaller than a GBP 1 coin can usually be repaired. We have provisionally booked a repair."
+          },
+          {
+            "role": "customer",
+            "timestamp": "2026-08-06T17:05:00",
+            "sender": "Driver",
+            "content": "The chip has now spread into a long crack across the driver's side."
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-08-07T08:30:00",
+            "sender": "Glass Desk",
+            "content": "A crack in the driver's line of sight can't be repaired, so we've cancelled the repair and booked a full windscreen replacement for 12 August at your home address. The vehicle has a lane-assist camera, so ADAS calibration will be done after fitting."
+          },
+          {
+            "role": "customer",
+            "timestamp": "2026-08-07T08:45:00",
+            "sender": "Driver",
+            "content": "OK. Do I have to pay anything?"
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-08-07T09:02:00",
+            "sender": "Glass Desk",
+            "content": "Your policy has a GBP 95 glass excess. Payment has now been taken, thank you."
+          }
+        ]
+      },
+      "conversation": "[CUSTOMER]: Hi, a stone has chipped my windscreen on the M6. Can it be repaired? Call me on [PHONE].\n[SUPPORT]: Thanks. A chip smaller than a GBP 1 coin can usually be repaired. We have provisionally booked a repair.\n[CUSTOMER]: The chip has now spread into a long crack across the driver's side.\n[SUPPORT]: A crack in the driver's line of sight can't be repaired, so we've cancelled the repair and booked a full windscreen replacement for 12 August at your home address. The vehicle has a lane-assist camera, so ADAS calibration will be done after fitting.\n[CUSTOMER]: OK. Do I have to pay anything?\n[SUPPORT]: Your policy has a GBP 95 glass excess. Payment has now been taken, thank you.",
+      "pii_masked": 1,
+      "garbled": 0,
+      "summary_prompt": "<conversation>\n[CUSTOMER]: Hi, a stone has chipped my windscreen on the M6. Can it be repaired? Call me on [PHONE].\n[SUPPORT]: Thanks. A chip smaller than a GBP 1 coin can usually be repaired. We have provisionally booked a repair.\n[CUSTOMER]: The chip has now spread into a long crack across the driver's side.\n[SUPPORT]: A crack in the driver's line of sight can't be repaired, so we've cancelled the repair and booked a full windscreen replacement for 12 August at your home address. The vehicle has a lane-assist camera, so ADAS calibration will be done after fitting.\n[CUSTOMER]: OK. Do I have to pay anything?\n[SUPPORT]: Your policy has a GBP 95 glass excess. Payment has now been taken, thank you.\n</conversation>\n\nSummary style: Write a brief 2-3 sentence summary.\nWrite the summary using language code: en."
+    },
+    {
+      "id": "S2-accident-total-loss-detailed",
+      "description": "Long; detailed; estimate superseded; total loss decision; hire off-hire date",
+      "key_facts": [
+        "Rear-end collision on 2 September; vehicle not driveable and recovered to the bodyshop",
+        "Replacement hire car provided from 3 September",
+        "Initial estimate GBP 3,200 was superseded after strip-down by GBP 7,850 once chassis damage was found",
+        "Vehicle declared a total loss (Category S) because repair cost exceeded 60% of the GBP 11,500 market value",
+        "Hire car to be off-hired on 30 September; replacement vehicle order raised"
+      ],
+      "traps": [
+        "Must not present GBP 3,200 as the final repair cost",
+        "Must not say the vehicle is being repaired"
+      ],
+      "request": {
+        "summary_style": "detailed",
+        "language": "en",
+        "messages": [
+          {
+            "role": "customer",
+            "timestamp": "2026-09-02T08:15:00",
+            "sender": "Fleet Manager",
+            "content": "Our van was hit from behind at a junction this morning. It isn't driveable."
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-09-02T08:40:00",
+            "sender": "Accident Mgmt",
+            "content": "Sorry to hear that. Recovery has been arranged to the approved bodyshop. Was anyone injured?"
+          },
+          {
+            "role": "customer",
+            "timestamp": "2026-09-02T08:52:00",
+            "sender": "Fleet Manager",
+            "content": "No injuries. The third party admitted fault at the scene."
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-09-03T10:00:00",
+            "sender": "Accident Mgmt",
+            "content": "A like-for-like hire van has been delivered to your depot this morning."
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-09-08T14:20:00",
+            "sender": "Bodyshop",
+            "content": "Initial visual estimate is GBP 3,200 for rear bumper, doors and lamps."
+          },
+          {
+            "role": "customer",
+            "timestamp": "2026-09-12T09:00:00",
+            "sender": "Fleet Manager",
+            "content": "Any idea when repairs will start?"
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-09-15T16:45:00",
+            "sender": "Bodyshop",
+            "content": "Strip-down has found chassis rail damage. Revised estimate is GBP 7,850. Sent to engineer for review."
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-09-19T11:10:00",
+            "sender": "Engineer",
+            "content": "Pre-accident market value is GBP 11,500. Repair cost exceeds 60% of value, so the vehicle is uneconomical to repair and is declared a total loss, Category S."
+          },
+          {
+            "role": "customer",
+            "timestamp": "2026-09-19T12:30:00",
+            "sender": "Fleet Manager",
+            "content": "Understood. What happens with the hire van?"
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-09-22T09:15:00",
+            "sender": "Accident Mgmt",
+            "content": "The hire will continue until 30 September and will be off-hired on that date. A replacement vehicle order has been raised and the total loss settlement will be claimed from the third-party insurer."
+          },
+          {
+            "role": "customer",
+            "timestamp": "2026-09-22T09:30:00",
+            "sender": "Fleet Manager",
+            "content": "Thanks, please keep me updated on the settlement."
+          }
+        ]
+      },
+      "conversation": "[CUSTOMER]: Our van was hit from behind at a junction this morning. It isn't driveable.\n[SUPPORT]: Sorry to hear that. Recovery has been arranged to the approved bodyshop. Was anyone injured?\n[CUSTOMER]: No injuries. The third party admitted fault at the scene.\n[SUPPORT]: A like-for-like hire van has been delivered to your depot this morning.\n[SUPPORT]: Initial visual estimate is GBP 3,200 for rear bumper, doors and lamps.\n[CUSTOMER]: Any idea when repairs will start?\n[SUPPORT]: Strip-down has found chassis rail damage. Revised estimate is GBP 7,850. Sent to engineer for review.\n[SUPPORT]: Pre-accident market value is GBP 11,500. Repair cost exceeds 60% of value, so the vehicle is uneconomical to repair and is declared a total loss, Category S.\n[CUSTOMER]: Understood. What happens with the hire van?\n[SUPPORT]: The hire will continue until 30 September and will be off-hired on that date. A replacement vehicle order has been raised and the total loss settlement will be claimed from the third-party insurer.\n[CUSTOMER]: Thanks, please keep me updated on the settlement.",
+      "pii_masked": 0,
+      "garbled": 0,
+      "summary_prompt": "<conversation>\n[CUSTOMER]: Our van was hit from behind at a junction this morning. It isn't driveable.\n[SUPPORT]: Sorry to hear that. Recovery has been arranged to the approved bodyshop. Was anyone injured?\n[CUSTOMER]: No injuries. The third party admitted fault at the scene.\n[SUPPORT]: A like-for-like hire van has been delivered to your depot this morning.\n[SUPPORT]: Initial visual estimate is GBP 3,200 for rear bumper, doors and lamps.\n[CUSTOMER]: Any idea when repairs will start?\n[SUPPORT]: Strip-down has found chassis rail damage. Revised estimate is GBP 7,850. Sent to engineer for review.\n[SUPPORT]: Pre-accident market value is GBP 11,500. Repair cost exceeds 60% of value, so the vehicle is uneconomical to repair and is declared a total loss, Category S.\n[CUSTOMER]: Understood. What happens with the hire van?\n[SUPPORT]: The hire will continue until 30 September and will be off-hired on that date. A replacement vehicle order has been raised and the total loss settlement will be claimed from the third-party insurer.\n[CUSTOMER]: Thanks, please keep me updated on the settlement.\n</conversation>\n\nSummary style: Write a detailed paragraph summary covering all key points.\nWrite the summary using language code: en."
+    },
+    {
+      "id": "S3-breakdown-garbled-bullets",
+      "description": "Bullet points; one garbled message; outcome partly unknown",
+      "key_facts": [
+        "Vehicle broke down on the A1 with a warning light and loss of power",
+        "Patrol diagnosed a failed turbo actuator and towed the vehicle to the dealer",
+        "One message was unreadable",
+        "Dealer has ordered the part; repair date not yet confirmed"
+      ],
+      "traps": [
+        "Must not invent content for the unreadable message",
+        "Must not state a confirmed repair or completion date"
+      ],
+      "request": {
+        "summary_style": "bullet_points",
+        "language": "en",
+        "messages": [
+          {
+            "role": "customer",
+            "timestamp": "2026-10-01T07:05:00",
+            "sender": "Driver",
+            "content": "Broken down on the A1 northbound near junction 34. Engine warning light came on and the car lost power."
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-10-01T07:20:00",
+            "sender": "Breakdown Desk",
+            "content": "A patrol has been dispatched, ETA 45 minutes. Please wait in a safe place away from the vehicle."
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-10-01T08:30:00",
+            "sender": "Patrol",
+            "content": "@@@@ #### NULL ERROR ???? ???? %%%% ####"
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-10-01T08:55:00",
+            "sender": "Patrol",
+            "content": "Diagnosed a failed turbo actuator. Not repairable at the roadside. Vehicle is being towed to the main dealer."
+          },
+          {
+            "role": "customer",
+            "timestamp": "2026-10-02T10:00:00",
+            "sender": "Driver",
+            "content": "When will it be fixed?"
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-10-02T13:40:00",
+            "sender": "Dealer",
+            "content": "The actuator has been ordered from the manufacturer. We'll confirm a repair date once it arrives."
+          }
+        ]
+      },
+      "conversation": "[CUSTOMER]: Broken down on the A1 northbound near junction 34. Engine warning light came on and the car lost power.\n[SUPPORT]: A patrol has been dispatched, ETA 45 minutes. Please wait in a safe place away from the vehicle.\n[SUPPORT]: [unreadable message: repeated symbol run ('@@@@')]\n[SUPPORT]: Diagnosed a failed turbo actuator. Not repairable at the roadside. Vehicle is being towed to the main dealer.\n[CUSTOMER]: When will it be fixed?\n[SUPPORT]: The actuator has been ordered from the manufacturer. We'll confirm a repair date once it arrives.",
+      "pii_masked": 0,
+      "garbled": 1,
+      "summary_prompt": "<conversation>\n[CUSTOMER]: Broken down on the A1 northbound near junction 34. Engine warning light came on and the car lost power.\n[SUPPORT]: A patrol has been dispatched, ETA 45 minutes. Please wait in a safe place away from the vehicle.\n[SUPPORT]: [unreadable message: repeated symbol run ('@@@@')]\n[SUPPORT]: Diagnosed a failed turbo actuator. Not repairable at the roadside. Vehicle is being towed to the main dealer.\n[CUSTOMER]: When will it be fixed?\n[SUPPORT]: The actuator has been ordered from the manufacturer. We'll confirm a repair date once it arrives.\n</conversation>\n\nSummary style: Write a structured bullet-point list of key topics.\nWrite the summary using language code: en."
+    },
+    {
+      "id": "S4-service-reschedule-brief",
+      "description": "Brief; booking rescheduled multiple times; only the last date is valid",
+      "key_facts": [
+        "Annual service and MOT for the vehicle",
+        "Booking moved twice; final confirmed date is 3 October at 08:30 at the Leeds branch",
+        "Courtesy car confirmed for the day"
+      ],
+      "traps": [
+        "Must not give 24 September or 28 September as the booking date"
+      ],
+      "request": {
+        "summary_style": "brief",
+        "language": "en",
+        "messages": [
+          {
+            "role": "support",
+            "timestamp": "2026-09-10T09:00:00",
+            "sender": "Service Desk",
+            "content": "Your annual service and MOT are due. We've booked you in for 24 September at the Leeds branch."
+          },
+          {
+            "role": "customer",
+            "timestamp": "2026-09-11T12:15:00",
+            "sender": "Driver",
+            "content": "I'm away that week, can we move it?"
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-09-11T14:00:00",
+            "sender": "Service Desk",
+            "content": "Moved to 28 September at the Leeds branch."
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-09-25T16:30:00",
+            "sender": "Service Desk",
+            "content": "Apologies, the workshop has a technician shortage on 28 September. Your booking is now 3 October at 08:30, same branch."
+          },
+          {
+            "role": "customer",
+            "timestamp": "2026-09-25T17:00:00",
+            "sender": "Driver",
+            "content": "Fine. Will I get a courtesy car?"
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-09-26T08:45:00",
+            "sender": "Service Desk",
+            "content": "Yes, a courtesy car is confirmed for 3 October."
+          }
+        ]
+      },
+      "conversation": "[SUPPORT]: Your annual service and MOT are due. We've booked you in for 24 September at the [ADDRESS] branch.\n[CUSTOMER]: I'm away that week, can we move it?\n[SUPPORT]: Moved to 28 September at the [ADDRESS] branch.\n[SUPPORT]: Apologies, the workshop has a technician shortage on 28 September. Your booking is now 3 October at 08:30, same branch.\n[CUSTOMER]: Fine. Will I get a courtesy car?\n[SUPPORT]: Yes, a courtesy car is confirmed for 3 October.",
+      "pii_masked": 2,
+      "garbled": 0,
+      "summary_prompt": "<conversation>\n[SUPPORT]: Your annual service and MOT are due. We've booked you in for 24 September at the [ADDRESS] branch.\n[CUSTOMER]: I'm away that week, can we move it?\n[SUPPORT]: Moved to 28 September at the [ADDRESS] branch.\n[SUPPORT]: Apologies, the workshop has a technician shortage on 28 September. Your booking is now 3 October at 08:30, same branch.\n[CUSTOMER]: Fine. Will I get a courtesy car?\n[SUPPORT]: Yes, a courtesy car is confirmed for 3 October.\n</conversation>\n\nSummary style: Write a brief 2-3 sentence summary.\nWrite the summary using language code: en."
+    },
+    {
+      "id": "S5-fuelcard-dispute-detailed",
+      "description": "Detailed; email and card number PII; refund and card replacement",
+      "key_facts": [
+        "Duplicate fuel card charge of GBP 86.40 at a fuel station on 14 October",
+        "Investigation confirmed the duplicate and a refund was approved",
+        "Credit expected within 5 working days",
+        "The card was cancelled as a precaution and a replacement card issued"
+      ],
+      "traps": [
+        "Must not reproduce the email address or card number",
+        "Must not say the refund has already been received"
+      ],
+      "request": {
+        "summary_style": "detailed",
+        "language": "en",
+        "messages": [
+          {
+            "role": "customer",
+            "timestamp": "2026-10-15T09:10:00",
+            "sender": "Fleet Admin",
+            "content": "We've been charged twice for the same fill-up of GBP 86.40 on 14 October at the Shell station in Wakefield. Card 4111 1111 1111 1111. Please reply to fleet.admin@example.com."
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-10-15T10:00:00",
+            "sender": "Card Services",
+            "content": "Thank you. We've opened a transaction dispute and asked the merchant for the terminal logs."
+          },
+          {
+            "role": "customer",
+            "timestamp": "2026-10-17T11:30:00",
+            "sender": "Fleet Admin",
+            "content": "Any news? Also, should we be worried the card is compromised?"
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-10-18T15:20:00",
+            "sender": "Card Services",
+            "content": "The merchant confirmed a terminal fault caused a duplicate authorisation. A refund of GBP 86.40 has been approved and should appear on your account within 5 working days."
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-10-18T15:25:00",
+            "sender": "Card Services",
+            "content": "As a precaution the card has been cancelled and a replacement card has been dispatched to your registered address."
+          },
+          {
+            "role": "customer",
+            "timestamp": "2026-10-18T15:40:00",
+            "sender": "Fleet Admin",
+            "content": "Great, thank you for sorting this."
+          }
+        ]
+      },
+      "conversation": "[CUSTOMER]: We've been charged twice for the same fill-up of GBP 86.40 on 14 October at the Shell station in Wakefield. Card [CREDIT_CARD]. Please reply to [EMAIL].\n[SUPPORT]: Thank you. We've opened a transaction dispute and asked the merchant for the terminal logs.\n[CUSTOMER]: Any news? Also, should we be worried the card is compromised?\n[SUPPORT]: The merchant confirmed a terminal fault caused a duplicate authorisation. A refund of GBP 86.40 has been approved and should appear on your account within 5 working days.\n[SUPPORT]: As a precaution the card has been cancelled and a replacement card has been dispatched to your registered address.\n[CUSTOMER]: Great, thank you for sorting this.",
+      "pii_masked": 2,
+      "garbled": 0,
+      "summary_prompt": "<conversation>\n[CUSTOMER]: We've been charged twice for the same fill-up of GBP 86.40 on 14 October at the Shell station in Wakefield. Card [CREDIT_CARD]. Please reply to [EMAIL].\n[SUPPORT]: Thank you. We've opened a transaction dispute and asked the merchant for the terminal logs.\n[CUSTOMER]: Any news? Also, should we be worried the card is compromised?\n[SUPPORT]: The merchant confirmed a terminal fault caused a duplicate authorisation. A refund of GBP 86.40 has been approved and should appear on your account within 5 working days.\n[SUPPORT]: As a precaution the card has been cancelled and a replacement card has been dispatched to your registered address.\n[CUSTOMER]: Great, thank you for sorting this.\n</conversation>\n\nSummary style: Write a detailed paragraph summary covering all key points.\nWrite the summary using language code: en."
+    },
+    {
+      "id": "S6-ev-warranty-french",
+      "description": "Brief; summary must be in French; decision reversed on appeal",
+      "key_facts": [
+        "EV charging cable stopped working",
+        "Warranty claim was initially rejected as physical damage",
+        "After photos showed an internal fault, the rejection was overturned and the claim approved",
+        "A replacement cable is being sent by courier"
+      ],
+      "traps": [
+        "Must not say the claim is rejected (final state is approved)",
+        "Summary must be written in French"
+      ],
+      "request": {
+        "summary_style": "brief",
+        "language": "fr",
+        "messages": [
+          {
+            "role": "customer",
+            "timestamp": "2026-10-20T08:00:00",
+            "sender": "Driver",
+            "content": "My EV's Type 2 charging cable has stopped working. The car won't charge with it."
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-10-20T11:30:00",
+            "sender": "Warranty Team",
+            "content": "Your warranty claim has been rejected because the fault appears to be physical damage, which isn't covered."
+          },
+          {
+            "role": "customer",
+            "timestamp": "2026-10-20T12:10:00",
+            "sender": "Driver",
+            "content": "The cable isn't damaged. I've attached photos showing the connector is intact and the fault light is on in the control box."
+          },
+          {
+            "role": "support",
+            "timestamp": "2026-10-21T09:45:00",
+            "sender": "Warranty Team",
+            "content": "Thanks for the photos. The technician agrees this is an internal control box fault. The rejection has been overturned and the claim approved. A replacement cable is being sent by courier."
+          }
+        ]
+      },
+      "conversation": "[CUSTOMER]: My EV's Type 2 charging cable has stopped working. The car won't charge with it.\n[SUPPORT]: Your warranty claim has been rejected because the fault appears to be physical damage, which isn't covered.\n[CUSTOMER]: The cable isn't damaged. I've attached photos showing the connector is intact and the fault light is on in the control box.\n[SUPPORT]: Thanks for the photos. The technician agrees this is an internal control box fault. The rejection has been overturned and the claim approved. A replacement cable is being sent by courier.",
+      "pii_masked": 0,
+      "garbled": 0,
+      "summary_prompt": "<conversation>\n[CUSTOMER]: My EV's Type 2 charging cable has stopped working. The car won't charge with it.\n[SUPPORT]: Your warranty claim has been rejected because the fault appears to be physical damage, which isn't covered.\n[CUSTOMER]: The cable isn't damaged. I've attached photos showing the connector is intact and the fault light is on in the control box.\n[SUPPORT]: Thanks for the photos. The technician agrees this is an internal control box fault. The rejection has been overturned and the claim approved. A replacement cable is being sent by courier.\n</conversation>\n\nSummary style: Write a brief 2-3 sentence summary.\nWrite the summary using language code: fr."
+    }
+  ],
+  "rows": [
+    {
+      "model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+      "sample": "S1-windscreen-brief",
+      "error": null,
+      "summary_ms": 3528.8572999997996,
+      "json_ok": true,
+      "summary": "The customer reported a windscreen chip from the M6 that initially appeared repairable. After the chip spread into a crack across the driver's side, a full windscreen replacement was booked for 12 August at the customer's home address with ADAS calibration, and a £95 excess payment was collected.",
+      "out_tokens": 76,
+      "in_tokens": 371,
+      "verifier_ms": 3814.914900001895,
+      "verifier_ok": true,
+      "verifier_score": 1.0,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 5,
+        "notes": "All key facts covered accurately in a concise format with no trap violations or hallucinations."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 5
+    },
+    {
+      "model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+      "sample": "S2-accident-total-loss-detailed",
+      "error": null,
+      "summary_ms": 5609.399699998903,
+      "json_ok": true,
+      "summary": "A customer's van was involved in a rear-end collision at a junction and rendered undriveable, though no injuries occurred. The third party admitted fault at the scene. The vehicle was recovered to an approved bodyshop, and a like-for-like hire van was delivered to the customer's depot the same morning. Initial visual assessment estimated repair costs at GBP 3,200 for rear bumper, doors, and lamps. However, strip-down inspection revealed chassis rail damage, increasing the revised estimate to GBP 7,850. Given the pre-accident market value of GBP 11,500, the repair cost exceeded 60% of the vehicle's value, resulting in the vehicle being declared a total loss and categorized as Category S (uneconomical to repair). The hire van will continue until 30 September, at which point it will be off-hired. A replacement vehicle order has been raised, and the total loss settlement will be claimed from the third-party insurer.",
+      "out_tokens": 229,
+      "in_tokens": 463,
+      "verifier_ms": 5884.494699999777,
+      "verifier_ok": true,
+      "verifier_score": 1.0,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 5,
+        "notes": "Comprehensive and accurate summary that covers all key facts, avoids traps, and correctly presents the progression from initial estimate to total loss declaration."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 5
+    },
+    {
+      "model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+      "sample": "S3-breakdown-garbled-bullets",
+      "error": null,
+      "summary_ms": 3799.7002999982215,
+      "json_ok": true,
+      "summary": "• Customer experienced breakdown on A1 northbound near junction 34\n• Symptoms: Engine warning light activated and vehicle lost power\n• Patrol dispatched with 45-minute ETA\n• Diagnosis: Failed turbo actuator\n• Issue not repairable at roadside\n• Vehicle towed to main dealer\n• Replacement actuator ordered from manufacturer\n• Repair date to be confirmed upon part arrival",
+      "out_tokens": 113,
+      "in_tokens": 326,
+      "verifier_ms": 4046.2456999994174,
+      "verifier_ok": true,
+      "verifier_score": 1.0,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          false,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 4,
+        "notes": "Summary is accurate and well-structured but omits mention of the unreadable message in the conversation."
+      },
+      "fact_coverage": 0.75,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 4
+    },
+    {
+      "model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+      "sample": "S4-service-reschedule-brief",
+      "error": null,
+      "summary_ms": 3195.447399997647,
+      "json_ok": true,
+      "summary": "The customer's annual service and MOT appointment was rescheduled twice due to their availability and a technician shortage. The final appointment is confirmed for 3 October at 08:30 at the [ADDRESS] branch with a courtesy car provided.",
+      "out_tokens": 61,
+      "in_tokens": 316,
+      "verifier_ms": 3566.821500000515,
+      "verifier_ok": true,
+      "verifier_score": 1.0,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 5,
+        "notes": "Summary accurately captures all key facts in two sentences, avoids trap dates, and correctly states the final booking."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 5
+    },
+    {
+      "model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+      "sample": "S5-fuelcard-dispute-detailed",
+      "error": null,
+      "summary_ms": 3542.9303999990225,
+      "json_ok": true,
+      "summary": "The customer reported being charged twice for the same transaction of GBP 86.40 on 14 October at a Shell station in Wakefield. Support opened a transaction dispute and contacted the merchant for terminal logs. The merchant confirmed that a terminal fault caused a duplicate authorisation. A refund of GBP 86.40 was approved and is expected to appear in the customer's account within 5 working days. As a precautionary measure, the card was cancelled and a replacement card was dispatched to the customer's registered address. The customer expressed satisfaction with the resolution.",
+      "out_tokens": 140,
+      "in_tokens": 359,
+      "verifier_ms": 3857.7261000027647,
+      "verifier_ok": true,
+      "verifier_score": 1.0,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 5,
+        "notes": "Comprehensive summary covering all key facts in detailed paragraph form without exposing PII or making unsupported claims."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 5
+    },
+    {
+      "model": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+      "sample": "S6-ev-warranty-french",
+      "error": null,
+      "summary_ms": 4088.610899998457,
+      "json_ok": true,
+      "summary": "Le client a signalé un câble de recharge Type 2 défectueux pour véhicule électrique. La demande de garantie initialement rejetée pour dommage physique a été approuvée après examen des photos montrant un défaut interne du boîtier de contrôle. Un câble de remplacement est en cours d'envoi par coursier.",
+      "out_tokens": 107,
+      "in_tokens": 304,
+      "verifier_ms": 3964.530699999159,
+      "verifier_ok": true,
+      "verifier_score": 1.0,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 5,
+        "notes": "Excellent summary that accurately captures all key facts in proper French with appropriate brevity."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 5
+    },
+    {
+      "model": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "sample": "S1-windscreen-brief",
+      "error": null,
+      "summary_ms": 1727.7310999998008,
+      "json_ok": true,
+      "summary": "A customer reported a stone chip to their windscreen on the M6. The chip subsequently spread into a crack across the driver's side, making repair impossible. Support cancelled the initial repair booking and arranged a full windscreen replacement for 12 August with ADAS calibration, charging a GBP 95 glass excess to the customer's policy.",
+      "out_tokens": 90,
+      "in_tokens": 371,
+      "verifier_ms": 1806.112199999916,
+      "verifier_ok": true,
+      "verifier_score": 0.92,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 5,
+        "notes": "Summary accurately covers all key facts in a brief format without falling into any traps."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 5
+    },
+    {
+      "model": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "sample": "S2-accident-total-loss-detailed",
+      "error": null,
+      "summary_ms": 2255.8142999987467,
+      "json_ok": true,
+      "summary": "A customer's van was hit from behind at a junction and was not driveable. No injuries occurred, and the third party admitted fault at the scene. The vehicle was recovered to an approved bodyshop. A like-for-like hire van was delivered to the customer's depot. Initial visual damage estimate was GBP 3,200 for rear bumper, doors, and lamps. During strip-down, chassis rail damage was discovered, revising the estimate to GBP 7,850, which was sent to an engineer for review. With a pre-accident market value of GBP 11,500, the repair cost exceeded 60% of the vehicle's value, resulting in the vehicle being declared a total loss with Category S classification. A replacement vehicle order has been raised. The hire van will continue until 30 September, at which point it will be off-hired. The total loss settlement will be claimed from the third-party insurer.",
+      "out_tokens": 220,
+      "in_tokens": 463,
+      "verifier_ms": 1615.000300000247,
+      "verifier_ok": true,
+      "verifier_score": 0.95,
+      "judge": {
+        "facts_covered": [
+          false,
+          false,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 3,
+        "notes": "Summary omits the specific dates (2 September collision, 3 September hire start) which are key facts, but otherwise accurately captures the progression from initial estimate to total loss without falling into traps."
+      },
+      "fact_coverage": 0.6,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 3
+    },
+    {
+      "model": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "sample": "S3-breakdown-garbled-bullets",
+      "error": null,
+      "summary_ms": 1902.2733000019798,
+      "json_ok": true,
+      "summary": "• Customer vehicle broke down on A1 northbound near junction 34 with engine warning light and power loss\n• Support dispatched a patrol with 45-minute ETA and advised customer to wait in safe location away from vehicle\n• Diagnosis: failed turbo actuator\n• Vehicle being towed to main dealer as fault not repairable at roadside\n• Repair timeline: turbo actuator has been ordered from manufacturer; repair date to be confirmed upon arrival",
+      "out_tokens": 121,
+      "in_tokens": 326,
+      "verifier_ms": 1661.5697999986878,
+      "verifier_ok": true,
+      "verifier_score": 0.92,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          false,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 4,
+        "notes": "Summary is accurate and well-structured but omits mention of the unreadable message in the conversation."
+      },
+      "fact_coverage": 0.75,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 4
+    },
+    {
+      "model": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "sample": "S4-service-reschedule-brief",
+      "error": null,
+      "summary_ms": 1581.399999999121,
+      "json_ok": true,
+      "summary": "A customer's annual service and MOT appointment was rescheduled from 24 September to 3 October at 08:30 at the same branch due to the customer's unavailability and a subsequent technician shortage. A courtesy car has been confirmed for the 3 October appointment.",
+      "out_tokens": 80,
+      "in_tokens": 316,
+      "verifier_ms": 1537.517000000662,
+      "verifier_ok": true,
+      "verifier_score": 0.95,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [
+          "Must not give 24 September or 28 September as the booking date"
+        ],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 3,
+        "notes": "Summary mentions 24 September as a date, which violates the trap rule even though it provides context about rescheduling."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 1,
+      "hallucinations": 0,
+      "judge_score": 3
+    },
+    {
+      "model": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "sample": "S5-fuelcard-dispute-detailed",
+      "error": null,
+      "summary_ms": 1954.5687999998336,
+      "json_ok": true,
+      "summary": "A customer reported being charged twice for a GBP 86.40 fuel purchase on 14 October at a Shell station in Wakefield using their credit card. Support opened a transaction dispute and contacted the merchant for terminal logs. The merchant confirmed that a terminal fault had caused the duplicate authorisation. Support approved a refund of GBP 86.40, which is expected to appear in the customer's account within 5 working days. As a precautionary measure, the card was cancelled and a replacement card was dispatched to the customer's registered address. The customer confirmed satisfaction with the resolution.",
+      "out_tokens": 144,
+      "in_tokens": 359,
+      "verifier_ms": 1610.9188000009453,
+      "verifier_ok": true,
+      "verifier_score": 0.92,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 5,
+        "notes": "Comprehensive summary covering all key facts in detailed paragraph form without exposing PII or making unsupported claims."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 5
+    },
+    {
+      "model": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "sample": "S6-ev-warranty-french",
+      "error": null,
+      "summary_ms": 2200.601499996992,
+      "json_ok": true,
+      "summary": "Un client signale que le câble de recharge Type 2 de son véhicule électrique ne fonctionne plus. La demande de garantie a d'abord été rejetée pour dommages physiques, mais après que le client ait fourni des photos montrant le connecteur intact et un voyant de défaut allumé sur le boîtier de commande, le technicien a confirmé qu'il s'agissait d'une défaillance interne. La réclamation a été approuvée et un câble de remplacement est en cours d'expédition par coursier.",
+      "out_tokens": 159,
+      "in_tokens": 304,
+      "verifier_ms": 1377.0552999994834,
+      "verifier_ok": true,
+      "verifier_score": 0.95,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 5,
+        "notes": "Excellent summary that accurately captures all key facts in French, correctly reflects the final approved status, and maintains appropriate brevity."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 5
+    },
+    {
+      "model": "us.amazon.nova-2-lite-v1:0",
+      "sample": "S1-windscreen-brief",
+      "error": null,
+      "summary_ms": 1589.5916999979818,
+      "json_ok": true,
+      "summary": "The customer reported a chipped windscreen that has developed into a long crack across the driver's side. The support team cancelled the repair and booked a full windscreen replacement for 12 August at the customer's home address, noting that ADAS calibration will be required after fitting due to a lane-assist camera. The customer's policy includes a GBP 95 glass excess, which has been applied and payment taken.",
+      "out_tokens": 91,
+      "in_tokens": 362,
+      "verifier_ms": 1176.9904000029783,
+      "verifier_ok": true,
+      "verifier_score": 1.0,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": false,
+        "language_ok": true,
+        "score": 4,
+        "notes": "All facts covered accurately and no traps violated, but the summary is 4 sentences rather than the requested 2-3 for brief style."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 4
+    },
+    {
+      "model": "us.amazon.nova-2-lite-v1:0",
+      "sample": "S2-accident-total-loss-detailed",
+      "error": null,
+      "summary_ms": 1898.9299000022584,
+      "json_ok": true,
+      "summary": "The customer's van was hit from behind at a junction and is not driveable. No injuries occurred, and the third party admitted fault. A recovery to an approved bodyshop has been arranged, and a hire van has been delivered to the customer's depot. Initial estimates for repairs were GBP 3,200, but after strip-down, chassis rail damage was found, raising the estimate to GBP 7,850. The pre-accident market value of the van was GBP 11,500, and since the repair cost exceeds 60% of the value, the vehicle has been declared a total loss (Category S). The hire van will continue until 30 September, after which it will be off-hired. A replacement vehicle order has been raised, and the total loss settlement will be claimed from the third-party insurer. The customer has requested updates on the settlement.",
+      "out_tokens": 188,
+      "in_tokens": 449,
+      "verifier_ms": 1130.419900000561,
+      "verifier_ok": true,
+      "verifier_score": 1.0,
+      "judge": {
+        "facts_covered": [
+          false,
+          false,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 4,
+        "notes": "Summary is accurate and detailed but omits the specific dates (2 September collision, 3 September hire start) mentioned in the key facts."
+      },
+      "fact_coverage": 0.6,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 4
+    },
+    {
+      "model": "us.amazon.nova-2-lite-v1:0",
+      "sample": "S3-breakdown-garbled-bullets",
+      "error": null,
+      "summary_ms": 1730.9007000003476,
+      "json_ok": true,
+      "summary": "The customer reported a breakdown on the A1 northbound near junction 34, with an engine warning light and loss of power. Support dispatched a patrol with a 45-minute ETA and advised the customer to wait in a safe place away from the vehicle. The issue was diagnosed as a failed turbo actuator, which cannot be repaired at the roadside, so the vehicle was towed to the main dealer. The actuator has been ordered from the manufacturer, and a repair date will be confirmed once it arrives.",
+      "out_tokens": 111,
+      "in_tokens": 324,
+      "verifier_ms": 1074.8237000007066,
+      "verifier_ok": true,
+      "verifier_score": 1.0,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          false,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": false,
+        "language_ok": true,
+        "score": 3,
+        "notes": "Summary is accurate and avoids traps, but uses paragraph format instead of requested bullet points and omits mention of the unreadable message."
+      },
+      "fact_coverage": 0.75,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 3
+    },
+    {
+      "model": "us.amazon.nova-2-lite-v1:0",
+      "sample": "S4-service-reschedule-brief",
+      "error": null,
+      "summary_ms": 2021.4176999979827,
+      "json_ok": true,
+      "summary": "The customer's annual service and MOT were initially scheduled for 24 September at the [ADDRESS] branch, but due to the customer's unavailability, the appointment was rescheduled to 28 September. However, because of a technician shortage, the appointment was moved again to 3 October at 08:30 at the same branch. A courtesy car has been confirmed for the 3 October appointment.",
+      "out_tokens": 90,
+      "in_tokens": 315,
+      "verifier_ms": 1107.3164000008546,
+      "verifier_ok": true,
+      "verifier_score": 1.0,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": false,
+        "language_ok": true,
+        "score": 3,
+        "notes": "All facts covered and no traps violated, but the summary is too long for 'brief' style which should be 2-3 sentences, not 4."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 3
+    },
+    {
+      "model": "us.amazon.nova-2-lite-v1:0",
+      "sample": "S5-fuelcard-dispute-detailed",
+      "error": null,
+      "summary_ms": 1921.4281999993545,
+      "json_ok": true,
+      "summary": "The customer reported being charged twice for a GBP 86.40 fuel purchase at a Shell station in Wakefield on 14 October, using card [CREDIT_CARD], and requested a response to [EMAIL]. Support confirmed that the duplicate charge was due to a terminal fault at the merchant, and a refund of GBP 86.40 has been approved, expected to appear within 5 working days. Additionally, as a precaution, the card was cancelled and a replacement card was dispatched to the customer's registered address. The customer expressed satisfaction with the resolution.",
+      "out_tokens": 121,
+      "in_tokens": 350,
+      "verifier_ms": 990.1527000001806,
+      "verifier_ok": true,
+      "verifier_score": 1.0,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [
+          "Must not reproduce the email address or card number"
+        ],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 2,
+        "notes": "Summary covers all key facts in detailed paragraph form, but reproduces the masked card number and email address placeholders which violates PII handling requirements."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 1,
+      "hallucinations": 0,
+      "judge_score": 2
+    },
+    {
+      "model": "us.amazon.nova-2-lite-v1:0",
+      "sample": "S6-ev-warranty-french",
+      "error": null,
+      "summary_ms": 2042.5109999996494,
+      "json_ok": true,
+      "summary": "Le client a signalé que le câble de charge Type 2 de son véhicule électrique ne fonctionne plus. Le support a d'abord rejeté la réclamation, estimant qu'il s'agissait de dommages physiques non couverts, mais a ensuite révisé sa décision après que le client ait fourni des photos montrant que le connecteur était intact et que le voyant de défaut était allumé dans le boîtier de contrôle. Le technicien a confirmé qu'il s'agissait d'une panne interne du boîtier de contrôle, la réclamation a été approuvée et un câble de remplacement est en cours d'envoi par courrier.",
+      "out_tokens": 162,
+      "in_tokens": 308,
+      "verifier_ms": 1195.9784999999101,
+      "verifier_ok": true,
+      "verifier_score": 1.0,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": false,
+        "language_ok": true,
+        "score": 4,
+        "notes": "All facts accurately covered in French, but the summary is too long for 'brief' style (should be 2-3 sentences, this has 3 long compound sentences that read more like a detailed summary)."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 4
+    },
+    {
+      "model": "us.meta.llama4-maverick-17b-instruct-v1:0",
+      "sample": "S1-windscreen-brief",
+      "error": null,
+      "summary_ms": 1397.8361999979825,
+      "json_ok": true,
+      "summary": "A customer's windscreen was damaged on the M6, initially booked for repair but later required replacement due to a crack in the driver's line of sight. A replacement was booked for 12 August with ADAS calibration. The customer was charged a GBP 95 glass excess.",
+      "out_tokens": 60,
+      "in_tokens": 352,
+      "verifier_ms": 896.2638000011793,
+      "verifier_ok": true,
+      "verifier_score": 0.9,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 5,
+        "notes": "Summary accurately covers all key facts in brief style without falling into any traps."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 5
+    },
+    {
+      "model": "us.meta.llama4-maverick-17b-instruct-v1:0",
+      "sample": "S2-accident-total-loss-detailed",
+      "error": null,
+      "summary_ms": 1777.6948000027915,
+      "json_ok": true,
+      "summary": "A customer's van was involved in an accident at a junction, where it was hit from behind and rendered undriveable. Fortunately, no one was injured, and the third party admitted fault. A replacement hire van was delivered to the customer's depot on the same day. Initial damage estimates were around GBP 3,200, but upon further inspection, chassis rail damage was discovered, revising the estimate to GBP 7,850. As the repair cost exceeded 60% of the van's pre-accident market value of GBP 11,500, it was declared a total loss (Category S). The hire van will continue to be used until 30 September, after which it will be off-hired. A replacement vehicle order has been raised, and a total loss settlement will be claimed from the third-party insurer.",
+      "out_tokens": 170,
+      "in_tokens": 435,
+      "verifier_ms": 1020.8268999995198,
+      "verifier_ok": true,
+      "verifier_score": 0.95,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [
+          "The summary states the hire van was delivered 'on the same day' as the accident, but the conversation only says it was delivered 'this morning' without confirming it was the same day as the accident"
+        ],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 4,
+        "notes": "Comprehensive summary covering all key facts and avoiding traps, but includes a minor unsupported inference about the timing of hire van delivery."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 0,
+      "hallucinations": 1,
+      "judge_score": 4
+    },
+    {
+      "model": "us.meta.llama4-maverick-17b-instruct-v1:0",
+      "sample": "S3-breakdown-garbled-bullets",
+      "error": null,
+      "summary_ms": 1474.0507999995316,
+      "json_ok": true,
+      "summary": "• Vehicle breakdown: A1 northbound near junction 34 due to engine warning light and loss of power.\n• Support response: Patrol dispatched with 45-minute ETA.\n• Diagnosis: Failed turbo actuator, not repairable at roadside.\n• Action taken: Vehicle towed to main dealer.\n• Repair status: Actuator ordered, awaiting confirmation of repair date upon arrival.",
+      "out_tokens": 86,
+      "in_tokens": 315,
+      "verifier_ms": 980.4764000000432,
+      "verifier_ok": true,
+      "verifier_score": 0.95,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          false,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 4,
+        "notes": "Summary is accurate and well-structured but omits mention of the unreadable message from the conversation."
+      },
+      "fact_coverage": 0.75,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 4
+    },
+    {
+      "model": "us.meta.llama4-maverick-17b-instruct-v1:0",
+      "sample": "S4-service-reschedule-brief",
+      "error": null,
+      "summary_ms": 1723.7482000018645,
+      "json_ok": true,
+      "summary": "The customer's annual service and MOT were rescheduled multiple times, with the final booking set for 3 October at 08:30 at the [ADDRESS] branch. A courtesy car was confirmed for the customer on the final booking date. The initial booking was for 24 September.",
+      "out_tokens": 62,
+      "in_tokens": 304,
+      "verifier_ms": 918.2102000013401,
+      "verifier_ok": true,
+      "verifier_score": 0.95,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [
+          "Must not give 24 September or 28 September as the booking date"
+        ],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 2,
+        "notes": "Summary correctly covers all key facts but violates the trap by mentioning 24 September as the initial booking date, which could cause confusion about the actual appointment."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 1,
+      "hallucinations": 0,
+      "judge_score": 2
+    },
+    {
+      "model": "us.meta.llama4-maverick-17b-instruct-v1:0",
+      "sample": "S5-fuelcard-dispute-detailed",
+      "error": null,
+      "summary_ms": 1442.3753000010038,
+      "json_ok": true,
+      "summary": "A customer reported being charged twice for a fill-up of GBP 86.40 on 14 October at a Shell station in Wakefield using a specific credit card. The support team opened a transaction dispute and requested terminal logs from the merchant. The merchant confirmed a terminal fault caused the duplicate authorisation. A refund of GBP 86.40 was approved and is expected to appear on the customer's account within 5 working days. As a precautionary measure, the credit card was cancelled and a replacement card was dispatched to the customer's registered address.",
+      "out_tokens": 114,
+      "in_tokens": 341,
+      "verifier_ms": 980.0823999976274,
+      "verifier_ok": true,
+      "verifier_score": 1.0,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 5,
+        "notes": "Comprehensive detailed summary covering all key facts without PII exposure or trap violations."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 5
+    },
+    {
+      "model": "us.meta.llama4-maverick-17b-instruct-v1:0",
+      "sample": "S6-ev-warranty-french",
+      "error": null,
+      "summary_ms": 1445.7891999991261,
+      "json_ok": true,
+      "summary": "Le câble de recharge Type 2 du véhicule électrique du client a cessé de fonctionner. Après examen de photos, le service client a déterminé que la panne était due à une défaillance interne de la boîte de contrôle. Un câble de remplacement a été envoyé par coursier.",
+      "out_tokens": 64,
+      "in_tokens": 299,
+      "verifier_ms": 910.1742999991984,
+      "verifier_ok": true,
+      "verifier_score": 0.9,
+      "judge": {
+        "facts_covered": [
+          true,
+          false,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 3,
+        "notes": "Summary omits the initial warranty rejection and its subsequent overturn, which is a key part of the resolution narrative."
+      },
+      "fact_coverage": 0.75,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 3
+    },
+    {
+      "model": "us.amazon.nova-micro-v1:0",
+      "sample": "S1-windscreen-brief",
+      "error": null,
+      "summary_ms": 1371.20159999904,
+      "json_ok": true,
+      "summary": "A customer reported a chipped windscreen on the M6. Initially, a repair was booked, but after the chip spread into a long crack affecting the driver's line of sight, the repair was cancelled and a full windscreen replacement was scheduled for 12 August. The customer was informed about the GBP 95 glass excess and that payment had been made.",
+      "out_tokens": 77,
+      "in_tokens": 323,
+      "verifier_ms": 771.1159999998927,
+      "verifier_ok": true,
+      "verifier_score": 0.9,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          false,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 3,
+        "notes": "Summary omits the ADAS camera calibration requirement, which is a key technical detail for the service."
+      },
+      "fact_coverage": 0.75,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 3
+    },
+    {
+      "model": "us.amazon.nova-micro-v1:0",
+      "sample": "S2-accident-total-loss-detailed",
+      "error": null,
+      "summary_ms": 1737.7204000003985,
+      "json_ok": true,
+      "summary": "The customer reported that their van was hit from behind at a junction and is currently not driveable. No injuries were reported, and the third party admitted fault at the scene. Recovery was arranged to an approved bodyshop, and a like-for-like hire van was delivered to the customer's depot. The initial repair estimate was GBP 3,200 for the rear bumper, doors, and lamps. However, upon strip-down, chassis rail damage was discovered, leading to a revised estimate of GBP 7,850. Since the repair cost exceeds 60% of the vehicle's pre-accident market value of GBP 11,500, the vehicle has been declared a total loss, Category S. The hire van will continue until 30 September, after which it will be off-hired, and a replacement vehicle order has been initiated. The total loss settlement will be claimed from the third-party insurer, and the customer has requested to be kept updated on the settlement process.",
+      "out_tokens": 216,
+      "in_tokens": 411,
+      "verifier_ms": 1005.1176000015403,
+      "verifier_ok": true,
+      "verifier_score": 0.95,
+      "judge": {
+        "facts_covered": [
+          false,
+          false,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 4,
+        "notes": "Summary is detailed and accurate but omits the specific dates (2 September collision, 3 September hire start) mentioned in the key facts."
+      },
+      "fact_coverage": 0.6,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 4
+    },
+    {
+      "model": "us.amazon.nova-micro-v1:0",
+      "sample": "S3-breakdown-garbled-bullets",
+      "error": null,
+      "summary_ms": 1418.1647999976121,
+      "json_ok": true,
+      "summary": "- [CUSTOMER] reports a broken down vehicle on the A1 northbound near junction 34, with an engine warning light and loss of power.\n- [SUPPORT] dispatched a patrol with an ETA of 45 minutes and advised the [CUSTOMER] to wait in a safe place away from the vehicle.\n- [SUPPORT] diagnosed a failed turbo actuator, which is not repairable at the roadside and will be towed to the main dealer.\n- [SUPPORT] confirmed that the actuator has been ordered from the manufacturer and a repair date will be confirmed upon arrival.",
+      "out_tokens": 130,
+      "in_tokens": 280,
+      "verifier_ms": 869.5164000018849,
+      "verifier_ok": true,
+      "verifier_score": 0.9,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          false,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 3,
+        "notes": "Summary omits mention of the unreadable message, which is a required key fact."
+      },
+      "fact_coverage": 0.75,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 3
+    },
+    {
+      "model": "us.amazon.nova-micro-v1:0",
+      "sample": "S4-service-reschedule-brief",
+      "error": null,
+      "summary_ms": 1284.8843000028864,
+      "json_ok": true,
+      "summary": "The customer's service and MOT booking was initially moved to 28 September but was rescheduled to 3 October due to a technician shortage. A courtesy car is confirmed for the new date and branch.",
+      "out_tokens": 47,
+      "in_tokens": 278,
+      "verifier_ms": 836.974799996824,
+      "verifier_ok": true,
+      "verifier_score": 0.9,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 5,
+        "notes": "Summary accurately captures all key facts, correctly states the final date of 3 October, and maintains brief style in 2 sentences."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 5
+    },
+    {
+      "model": "us.amazon.nova-micro-v1:0",
+      "sample": "S5-fuelcard-dispute-detailed",
+      "error": null,
+      "summary_ms": 1463.2947999998578,
+      "json_ok": true,
+      "summary": "The conversation involves a customer who reported being charged twice for a GBP 86.40 fill-up on 14 October at a Shell station in Wakefield using card [CREDIT_CARD]. The customer provided an email for further communication. The support team opened a transaction dispute and requested terminal logs from the merchant. The customer later inquired about the status of the dispute and whether the card might be compromised. The support team clarified that a terminal fault had caused the duplicate authorization and confirmed a refund of GBP 86.40, which should appear on the account within 5 working days. As a precaution, the card was cancelled, and a replacement card was sent to the customer's registered address. The customer expressed satisfaction with the resolution.",
+      "out_tokens": 162,
+      "in_tokens": 316,
+      "verifier_ms": 1021.1940000008326,
+      "verifier_ok": true,
+      "verifier_score": 0.95,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [
+          "Must not reproduce the email address or card number"
+        ],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 2,
+        "notes": "Summary covers all key facts and uses detailed style, but reproduces the masked card number [CREDIT_CARD] which violates PII handling requirements."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 1,
+      "hallucinations": 0,
+      "judge_score": 2
+    },
+    {
+      "model": "us.amazon.nova-micro-v1:0",
+      "sample": "S6-ev-warranty-french",
+      "error": null,
+      "summary_ms": 1374.2734000006749,
+      "json_ok": true,
+      "summary": "Le client signale que son câble de charge Type 2 ne fonctionne plus. Le service support rejette initialement la réclamation en raison de dommages physiques non couverts, mais après avoir examiné les photos fournies par le client montrant que le connecteur est intact, la réclamation est approuvée et un câble de remplacement est envoyé.",
+      "out_tokens": 85,
+      "in_tokens": 271,
+      "verifier_ms": 903.1921000023431,
+      "verifier_ok": true,
+      "verifier_score": 0.9,
+      "judge": {
+        "facts_covered": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "trap_violations": [],
+        "hallucinations": [],
+        "style_ok": true,
+        "language_ok": true,
+        "score": 5,
+        "notes": "Excellent summary covering all key facts in proper French with appropriate brevity."
+      },
+      "fact_coverage": 1.0,
+      "trap_violations": 0,
+      "hallucinations": 0,
+      "judge_score": 5
+    }
+  ]
+}

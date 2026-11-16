@@ -5,6 +5,7 @@ import logging
 import re
 from typing import Any, Protocol
 
+from app.core.aws import bedrock_runtime_client
 from app.core.config import Settings
 
 logger = logging.getLogger(__name__)
@@ -86,16 +87,13 @@ class BedrockGuardrailSanitizer:
 
     def _get_client(self):
         if self._client is None:
-            import boto3
-
-            kwargs: dict[str, Any] = {
-                "service_name": "bedrock-runtime",
-                "region_name": self.settings.aws_region,
-            }
-            if self.settings.bedrock_endpoint_url:
-                kwargs["endpoint_url"] = self.settings.bedrock_endpoint_url
-            self._client = boto3.client(**kwargs)
+            # No application-level retry here, so keep SDK retries for transient errors.
+            self._client = bedrock_runtime_client(self.settings, sdk_retries=True)
         return self._client
+
+    def warm_up(self) -> None:
+        """Create the client ahead of the first request."""
+        self._get_client()
 
     @staticmethod
     def _detections(assessments: list[dict[str, Any]]) -> list[dict[str, str]]:

@@ -1,0 +1,354 @@
+[
+  {
+    "id": "S1-windscreen-brief",
+    "description": "Short; brief style; phone number PII; plan changes from repair to replacement",
+    "key_facts": [
+      "Chip in windscreen grew into a crack, so repair was replaced by a full windscreen replacement",
+      "Replacement booked for 12 August at the customer's home address",
+      "ADAS camera calibration is required after replacement",
+      "Customer paid a GBP 95 excess"
+    ],
+    "traps": [
+      "Must not say the windscreen was repaired; the final plan is replacement, and it has not happened yet"
+    ],
+    "request": {
+      "summary_style": "brief",
+      "language": "en",
+      "messages": [
+        {
+          "role": "customer",
+          "timestamp": "2026-08-04T09:12:00",
+          "sender": "Driver",
+          "content": "Hi, a stone has chipped my windscreen on the M6. Can it be repaired? Call me on 07700 900123."
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-08-04T09:40:00",
+          "sender": "Glass Desk",
+          "content": "Thanks. A chip smaller than a GBP 1 coin can usually be repaired. We have provisionally booked a repair."
+        },
+        {
+          "role": "customer",
+          "timestamp": "2026-08-06T17:05:00",
+          "sender": "Driver",
+          "content": "The chip has now spread into a long crack across the driver's side."
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-08-07T08:30:00",
+          "sender": "Glass Desk",
+          "content": "A crack in the driver's line of sight can't be repaired, so we've cancelled the repair and booked a full windscreen replacement for 12 August at your home address. The vehicle has a lane-assist camera, so ADAS calibration will be done after fitting."
+        },
+        {
+          "role": "customer",
+          "timestamp": "2026-08-07T08:45:00",
+          "sender": "Driver",
+          "content": "OK. Do I have to pay anything?"
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-08-07T09:02:00",
+          "sender": "Glass Desk",
+          "content": "Your policy has a GBP 95 glass excess. Payment has now been taken, thank you."
+        }
+      ]
+    }
+  },
+  {
+    "id": "S2-accident-total-loss-detailed",
+    "description": "Long; detailed; estimate superseded; total loss decision; hire off-hire date",
+    "key_facts": [
+      "Rear-end collision; vehicle not driveable and recovered to the bodyshop",
+      "Replacement hire van provided",
+      "Initial estimate GBP 3,200 was superseded after strip-down by GBP 7,850 once chassis damage was found",
+      "Vehicle declared a total loss (Category S) because repair cost exceeded 60% of the GBP 11,500 market value",
+      "Hire car to be off-hired on 30 September; replacement vehicle order raised"
+    ],
+    "traps": [
+      "Must not present GBP 3,200 as the final repair cost",
+      "Must not say the vehicle is being repaired"
+    ],
+    "request": {
+      "summary_style": "detailed",
+      "language": "en",
+      "messages": [
+        {
+          "role": "customer",
+          "timestamp": "2026-09-02T08:15:00",
+          "sender": "Fleet Manager",
+          "content": "Our van was hit from behind at a junction this morning. It isn't driveable."
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-09-02T08:40:00",
+          "sender": "Accident Mgmt",
+          "content": "Sorry to hear that. Recovery has been arranged to the approved bodyshop. Was anyone injured?"
+        },
+        {
+          "role": "customer",
+          "timestamp": "2026-09-02T08:52:00",
+          "sender": "Fleet Manager",
+          "content": "No injuries. The third party admitted fault at the scene."
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-09-03T10:00:00",
+          "sender": "Accident Mgmt",
+          "content": "A like-for-like hire van has been delivered to your depot this morning."
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-09-08T14:20:00",
+          "sender": "Bodyshop",
+          "content": "Initial visual estimate is GBP 3,200 for rear bumper, doors and lamps."
+        },
+        {
+          "role": "customer",
+          "timestamp": "2026-09-12T09:00:00",
+          "sender": "Fleet Manager",
+          "content": "Any idea when repairs will start?"
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-09-15T16:45:00",
+          "sender": "Bodyshop",
+          "content": "Strip-down has found chassis rail damage. Revised estimate is GBP 7,850. Sent to engineer for review."
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-09-19T11:10:00",
+          "sender": "Engineer",
+          "content": "Pre-accident market value is GBP 11,500. Repair cost exceeds 60% of value, so the vehicle is uneconomical to repair and is declared a total loss, Category S."
+        },
+        {
+          "role": "customer",
+          "timestamp": "2026-09-19T12:30:00",
+          "sender": "Fleet Manager",
+          "content": "Understood. What happens with the hire van?"
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-09-22T09:15:00",
+          "sender": "Accident Mgmt",
+          "content": "The hire will continue until 30 September and will be off-hired on that date. A replacement vehicle order has been raised and the total loss settlement will be claimed from the third-party insurer."
+        },
+        {
+          "role": "customer",
+          "timestamp": "2026-09-22T09:30:00",
+          "sender": "Fleet Manager",
+          "content": "Thanks, please keep me updated on the settlement."
+        }
+      ]
+    }
+  },
+  {
+    "id": "S3-breakdown-garbled-bullets",
+    "description": "Bullet points; one garbled message; outcome partly unknown",
+    "key_facts": [
+      "Vehicle broke down on the A1 with a warning light and loss of power",
+      "Patrol diagnosed a failed turbo actuator and towed the vehicle to the dealer",
+      "One message was unreadable",
+      "Dealer has ordered the part; repair date not yet confirmed"
+    ],
+    "traps": [
+      "Must not invent content for the unreadable message",
+      "Must not state a confirmed repair or completion date"
+    ],
+    "request": {
+      "summary_style": "bullet_points",
+      "language": "en",
+      "messages": [
+        {
+          "role": "customer",
+          "timestamp": "2026-10-01T07:05:00",
+          "sender": "Driver",
+          "content": "Broken down on the A1 northbound near junction 34. Engine warning light came on and the car lost power."
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-10-01T07:20:00",
+          "sender": "Breakdown Desk",
+          "content": "A patrol has been dispatched, ETA 45 minutes. Please wait in a safe place away from the vehicle."
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-10-01T08:30:00",
+          "sender": "Patrol",
+          "content": "@@@@ #### NULL ERROR ???? ???? %%%% ####"
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-10-01T08:55:00",
+          "sender": "Patrol",
+          "content": "Diagnosed a failed turbo actuator. Not repairable at the roadside. Vehicle is being towed to the main dealer."
+        },
+        {
+          "role": "customer",
+          "timestamp": "2026-10-02T10:00:00",
+          "sender": "Driver",
+          "content": "When will it be fixed?"
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-10-02T13:40:00",
+          "sender": "Dealer",
+          "content": "The actuator has been ordered from the manufacturer. We'll confirm a repair date once it arrives."
+        }
+      ]
+    }
+  },
+  {
+    "id": "S4-service-reschedule-brief",
+    "description": "Brief; booking rescheduled multiple times; only the last date is valid",
+    "key_facts": [
+      "Annual service and MOT for the vehicle",
+      "Booking moved twice; final confirmed date is 3 October at 08:30 at the Leeds branch",
+      "Courtesy car confirmed for the day"
+    ],
+    "traps": [
+      "Must not present 24 September or 28 September as the current booking date (mentioning them as earlier, superseded dates is fine)"
+    ],
+    "request": {
+      "summary_style": "brief",
+      "language": "en",
+      "messages": [
+        {
+          "role": "support",
+          "timestamp": "2026-09-10T09:00:00",
+          "sender": "Service Desk",
+          "content": "Your annual service and MOT are due. We've booked you in for 24 September at the Leeds branch."
+        },
+        {
+          "role": "customer",
+          "timestamp": "2026-09-11T12:15:00",
+          "sender": "Driver",
+          "content": "I'm away that week, can we move it?"
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-09-11T14:00:00",
+          "sender": "Service Desk",
+          "content": "Moved to 28 September at the Leeds branch."
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-09-25T16:30:00",
+          "sender": "Service Desk",
+          "content": "Apologies, the workshop has a technician shortage on 28 September. Your booking is now 3 October at 08:30, same branch."
+        },
+        {
+          "role": "customer",
+          "timestamp": "2026-09-25T17:00:00",
+          "sender": "Driver",
+          "content": "Fine. Will I get a courtesy car?"
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-09-26T08:45:00",
+          "sender": "Service Desk",
+          "content": "Yes, a courtesy car is confirmed for 3 October."
+        }
+      ]
+    }
+  },
+  {
+    "id": "S5-fuelcard-dispute-detailed",
+    "description": "Detailed; email and card number PII; refund and card replacement",
+    "key_facts": [
+      "Duplicate fuel card charge of GBP 86.40 at a fuel station on 14 October",
+      "Investigation confirmed the duplicate and a refund was approved",
+      "Credit expected within 5 working days",
+      "The card was cancelled as a precaution and a replacement card issued"
+    ],
+    "traps": [
+      "Must not reproduce the actual email address or card number (masked placeholders such as [EMAIL] or [CREDIT_CARD] are fine)",
+      "Must not say the refund has already been received"
+    ],
+    "request": {
+      "summary_style": "detailed",
+      "language": "en",
+      "messages": [
+        {
+          "role": "customer",
+          "timestamp": "2026-10-15T09:10:00",
+          "sender": "Fleet Admin",
+          "content": "We've been charged twice for the same fill-up of GBP 86.40 on 14 October at the Shell station in Wakefield. Card 4111 1111 1111 1111. Please reply to fleet.admin@example.com."
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-10-15T10:00:00",
+          "sender": "Card Services",
+          "content": "Thank you. We've opened a transaction dispute and asked the merchant for the terminal logs."
+        },
+        {
+          "role": "customer",
+          "timestamp": "2026-10-17T11:30:00",
+          "sender": "Fleet Admin",
+          "content": "Any news? Also, should we be worried the card is compromised?"
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-10-18T15:20:00",
+          "sender": "Card Services",
+          "content": "The merchant confirmed a terminal fault caused a duplicate authorisation. A refund of GBP 86.40 has been approved and should appear on your account within 5 working days."
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-10-18T15:25:00",
+          "sender": "Card Services",
+          "content": "As a precaution the card has been cancelled and a replacement card has been dispatched to your registered address."
+        },
+        {
+          "role": "customer",
+          "timestamp": "2026-10-18T15:40:00",
+          "sender": "Fleet Admin",
+          "content": "Great, thank you for sorting this."
+        }
+      ]
+    }
+  },
+  {
+    "id": "S6-ev-warranty-french",
+    "description": "Brief; summary must be in French; decision reversed on appeal",
+    "key_facts": [
+      "EV charging cable stopped working",
+      "Warranty claim was initially rejected as physical damage",
+      "After photos showed an internal fault, the rejection was overturned and the claim approved",
+      "A replacement cable is being sent by courier"
+    ],
+    "traps": [
+      "Must not say the claim is rejected (final state is approved)",
+      "Summary must be written in French"
+    ],
+    "request": {
+      "summary_style": "brief",
+      "language": "fr",
+      "messages": [
+        {
+          "role": "customer",
+          "timestamp": "2026-10-20T08:00:00",
+          "sender": "Driver",
+          "content": "My EV's Type 2 charging cable has stopped working. The car won't charge with it."
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-10-20T11:30:00",
+          "sender": "Warranty Team",
+          "content": "Your warranty claim has been rejected because the fault appears to be physical damage, which isn't covered."
+        },
+        {
+          "role": "customer",
+          "timestamp": "2026-10-20T12:10:00",
+          "sender": "Driver",
+          "content": "The cable isn't damaged. I've attached photos showing the connector is intact and the fault light is on in the control box."
+        },
+        {
+          "role": "support",
+          "timestamp": "2026-10-21T09:45:00",
+          "sender": "Warranty Team",
+          "content": "Thanks for the photos. The technician agrees this is an internal control box fault. The rejection has been overturned and the claim approved. A replacement cable is being sent by courier."
+        }
+      ]
+    }
+  }
+]

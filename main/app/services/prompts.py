@@ -14,6 +14,10 @@ Treat these as missing information, not content to interpret; if they leave the 
 unclear, say so rather than guessing.
 
 Summarize only facts supported by the conversation. Do not invent names, dates, causes, or outcomes.
+Keep abbreviations, acronyms and reference numbers exactly as written; do not expand or explain them
+unless the conversation itself does.
+Assume the messages concern a single case unless the conversation explicitly says otherwise, and
+distinguish clearly between when work is expected to start and when it is expected to finish.
 Respond only as JSON with this structure:
 {"summary": "<summary text>"}
 """

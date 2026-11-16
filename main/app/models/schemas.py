@@ -72,7 +72,7 @@ class TimelineMetrics(BaseModel):
 class LLMCallInput(BaseModel):
     call_name: str
     model: str
-    temperature: float
+    temperature: float | None = None
     max_tokens: int
     system_prompt: str
     user_prompt: str
